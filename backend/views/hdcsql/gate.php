@@ -1,0 +1,43 @@
+<?php
+$this->title = 'ระบบจัดการข้อมูลเทียบเคียง HDC';
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+?>
+<h3>ระบบประมวลผลรายงานเทียบเคียง HDC</h3>
+<div id="res" style="display: none" class="alert alert-danger">
+    กำลังประมวลผล...
+</div>
+
+<?= Html::a('จัดการรายงาน', ['/hdcsql/index'], ['class' => 'btn btn-material-red-300 btn-lg', 'target' => '_blank']) ?>
+
+<a href="http://ftp2.plkhealth.go.th/rpt_update/" target="_blank" class="btn btn-material-lime btn-lg">
+    <i class="glyphicon glyphicon-alert"></i>
+    รายงานอัพเดท
+</a>
+
+<a class="btn btn-material-blue-300 btn-lg" onclick="hdc_exec()">
+    ประมวลผลรายงาน
+</a>
+<?php
+$link = Url::to(['hdcsql/exec']);
+?>
+<?php
+$js = <<<JS
+    function hdc_exec() {  
+        $('#res').toggle();
+        $.ajax({
+            url: "$link",            
+            success: function (data) {                
+                 $('#res').toggle();    
+                 if(data=='running'){
+                    alert('ไม่สามารถดำเนินการได้ ระบบกำลังประมวลผล');
+                 } 
+            }
+        });
+    }
+
+JS;
+$this->registerJs($js, yii\web\View::POS_HEAD);
+?>
+
