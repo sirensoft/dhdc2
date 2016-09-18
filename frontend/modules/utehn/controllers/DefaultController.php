@@ -52,6 +52,7 @@ class DefaultController extends AppController
         $config_main = Sysconfigmain::find()->one();
         $amp = $config_main->district_code;
         // Tambon
+        //$amp ='6301';
         $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE)='$amp'";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $tambon_json =[];
