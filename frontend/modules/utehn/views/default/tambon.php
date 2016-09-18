@@ -25,8 +25,6 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 </div>
 
 
-
-
 <?php
 $icon1 = "#40ff00";
 $icon2 = "#3366ff";
