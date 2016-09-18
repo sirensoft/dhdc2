@@ -1,7 +1,11 @@
 <?php
 $this->title = "Tambon";
 $this->registerCssFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css', ['async' => false, 'defer' => true]);
+$this->registerCssFile('http://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.css', ['async' => false, 'defer' => true]);
+
 $this->registerJsFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js', ['position' => $this::POS_HEAD]);
+$this->registerJsFile('http://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.js', ['position' => $this::POS_HEAD]);
+
 ?>
 
 
@@ -39,7 +43,7 @@ $js = <<<JS
         
     var _group1 = L.layerGroup().addTo(map);
     var _group2 = L.layerGroup().addTo(map);
-    
+         
     var tam_layer=L.geoJson($tambon_json,{
         style:style,
         onEachFeature:function(feature,layer){             
@@ -55,7 +59,7 @@ $js = <<<JS
                 layer.setIcon(L.mapbox.marker.icon({'marker-color': '#008000','marker-symbol':'h'})); 
                 layer.bindPopup(feature.properties.HOS);
            }
-       }).addTo(_group2);
+    }).addTo(_group2);
         
     var overlays = {               
         "ขอบเขตตำบล": _group1,
@@ -64,6 +68,27 @@ $js = <<<JS
     };
         
     L.control.layers(baseLayers,overlays).addTo(map);
+      
+    //search
+    var searchControl = new L.Control.Search({
+		layer: hos_layer,
+		propertyName: 'SEARCH_TEXT',
+		circleLocation: false,
+		
+    });
+
+    searchControl.on('search:locationfound', function(e) {
+				
+		if(e.layer._popup)e.layer.openPopup();
+
+    }).on('search:collapsed', function(e) {
+
+		hos_layer.eachLayer(function(layer) {	
+			hos_layer.resetStyle(layer);
+		});	
+    });
+	
+	map.addControl( searchControl );  
     
     // other function    
     function style(feature) {

@@ -74,7 +74,7 @@ class DefaultController extends AppController
         
         
               // Hos
-        $sql = " SELECT concat(t.hcode,'-',h.hosname) hos,t.lat,t.lon from geojson t 
+        $sql = " SELECT h.hosname,concat(t.hcode,'-',h.hosname) hos,t.lat,t.lon from geojson t 
                  INNER JOIN chospital_amp h ON t.hcode = h.hoscode ";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $hos_json =[];
@@ -83,6 +83,7 @@ class DefaultController extends AppController
                 'type'=>'Feature',
                 'properties'=>[
                     'HOS'=>$value['hos'],
+                    'SEARCH_TEXT'=>$value['hosname'],
                     
                 ],
                 'geometry'=>[
