@@ -1,5 +1,5 @@
 <?php
-$this->title = "Tambon";
+$this->title = "DHDC2:แผนที่แสดงที่ตั้งหน่วยบริการ";
 $this->registerCssFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css', ['async' => false, 'defer' => true]);
 $this->registerCssFile('./lib-gis/leaflet-search.min.css',['async' => false, 'defer' => true]);
 $this->registerCssFile('./lib-gis/leaflet.label.css',['async' => false, 'defer' => true]);
@@ -13,13 +13,14 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 
 <div class="panel panel-danger">
     <div class="panel-heading">
-        <p>แผนที่แสดงที่ตั้งหน่วยบริการ</p>
+        <b>แผนที่แสดงที่ตั้งหน่วยบริการ</b>
+        <p> ... </p>
     </div>
     <div class="panel-body">
         <div id="map" style="width: 100%;height: 460px"></div>   
     </div>
     <div class="panel-footer" id="info">
-        
+        ประสงค์ใช้งาน<b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b>กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">UTEHN PHNU</a>
         <?php
         //echo $hos_json;
         ?>
