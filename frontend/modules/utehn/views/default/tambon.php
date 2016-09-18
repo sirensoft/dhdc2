@@ -53,7 +53,7 @@ $js = <<<JS
     var tam_layer=L.geoJson($tambon_json,{
         style:style,
         onEachFeature:function(feature,layer){         
-            layer.bindPopup(feature.properties.TAM_NAMT);
+            //layer.bindPopup(feature.properties.TAM_NAMT);
             layer.bindLabel(feature.properties.TAM_NAMT);
             layer.on({
                     mouseover: highlightFeatureTamLayer,
