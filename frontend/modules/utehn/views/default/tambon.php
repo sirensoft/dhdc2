@@ -31,7 +31,7 @@ $js = <<<JS
     var map = L.mapbox.map('map', 'mapbox.streets').setView([16, 100], 6);
         
      var baseLayers = {
-	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map)  ,
+	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map),        
         "แผนที่ดาวเทียม": L.mapbox.tileLayer('mapbox.satellite'),
         
     };
@@ -51,7 +51,7 @@ $js = <<<JS
     
     var hos_layer =L.geoJson($hos_json,{
            onEachFeature:function(feature,layer){    
-                layer.setIcon(L.mapbox.marker.icon({'marker-color': '$icon2'})); 
+                layer.setIcon(L.mapbox.marker.icon({'marker-color': '$icon2','marker-symbol':'h'})); 
                 layer.bindPopup(feature.properties.HOS);
            }
        }).addTo(_group2);
