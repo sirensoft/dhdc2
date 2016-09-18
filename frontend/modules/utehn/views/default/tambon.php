@@ -1,10 +1,10 @@
 <?php
 $this->title = "Tambon";
 $this->registerCssFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css', ['async' => false, 'defer' => true]);
-$this->registerCssFile('http://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.css', ['async' => false, 'defer' => true]);
+$this->registerCssFile('./lib-gis/leaflet-search.min.css',['async' => false, 'defer' => true]);
 
 $this->registerJsFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js', ['position' => $this::POS_HEAD]);
-$this->registerJsFile('http://labs.easyblog.it/maps/leaflet-search/src/leaflet-search.js', ['position' => $this::POS_HEAD]);
+$this->registerJsFile('./lib-gis/leaflet-search.min.js',['position' => $this::POS_HEAD]);
 
 ?>
 
