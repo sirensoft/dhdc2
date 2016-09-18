@@ -28,7 +28,8 @@ $icon3 = "#ff3300";
 $js = <<<JS
              
     L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
-    var map = L.mapbox.map('map', 'mapbox.streets').setView([16, 100], 6);
+    //var map = L.mapbox.map('map', 'mapbox.streets').setView([16, 100], 6);
+    var map = L.mapbox.map('map');
         
      var baseLayers = {
 	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map),        
