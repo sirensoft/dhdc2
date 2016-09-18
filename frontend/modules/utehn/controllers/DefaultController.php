@@ -3,6 +3,7 @@
 namespace frontend\modules\utehn\controllers;
 
 use common\components\AppController;
+use backend\models\Sysconfigmain;
 
 class DefaultController extends AppController
 {
@@ -48,7 +49,9 @@ class DefaultController extends AppController
     }
     
     public function actionTambon(){
-        $amp = '6505';    
+        $config_main = Sysconfigmain::find()->one();
+        $amp = $config_main->district_code;
+        
         $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE)='$amp'";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $geojson =[];
