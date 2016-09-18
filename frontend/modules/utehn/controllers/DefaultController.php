@@ -49,6 +49,7 @@ class DefaultController extends AppController
     }
     
     public function actionTambon(){
+        $this->layout = 'gis';
         $config_main = Sysconfigmain::find()->one();
         $amp = $config_main->district_code;
         // Tambon
