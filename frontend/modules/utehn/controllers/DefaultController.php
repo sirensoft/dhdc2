@@ -59,7 +59,7 @@ class DefaultController extends AppController
             $geojson[]=[
                 'type'=>'Feature',
                 'properties'=>[
-                    'TAM_NAMT'=>$value['TAM_NAMT'],
+                    'TAM_NAMT'=>"ต.".$value['TAM_NAMT'],
                     
                 ],
                 'geometry'=>[
