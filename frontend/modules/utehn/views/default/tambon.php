@@ -51,23 +51,23 @@ $js = <<<JS
     
     var hos_layer =L.geoJson($hos_json,{
            onEachFeature:function(feature,layer){    
-                layer.setIcon(L.mapbox.marker.icon({'marker-color': '$icon2','marker-symbol':'h'})); 
+                layer.setIcon(L.mapbox.marker.icon({'marker-color': '#008000','marker-symbol':'h'})); 
                 layer.bindPopup(feature.properties.HOS);
            }
        }).addTo(_group2);
         
-    var overlays = {
-                "หน่วยบริการ": _group2,
-                "ขอบเขตตำบล": _group1
+    var overlays = {               
+        "ขอบเขตตำบล": _group1,
+        "หน่วยบริการ": _group2,
                
-            };
+    };
         
     L.control.layers(baseLayers,overlays).addTo(map);
     
     // other function    
     function style(feature) {
         return {
-            fillColor: '#40ff00',
+            fillColor: '#4169E1',
             weight: 2,
             opacity: 1,
             color: 'white',
