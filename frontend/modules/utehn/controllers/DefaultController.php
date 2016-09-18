@@ -51,12 +51,12 @@ class DefaultController extends AppController
     public function actionTambon(){
         $config_main = Sysconfigmain::find()->one();
         $amp = $config_main->district_code;
-        
+        // Tambon
         $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE)='$amp'";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
-        $geojson =[];
+        $tambon_json =[];
         foreach ($raw as $value) {
-            $geojson[]=[
+            $tambon_json[]=[
                 'type'=>'Feature',
                 'properties'=>[
                     'TAM_NAMT'=>"ต.".$value['TAM_NAMT'],
@@ -68,9 +68,36 @@ class DefaultController extends AppController
                 ]
             ];
         }
-        $geojson = json_encode($geojson);
+        $tambon_json = json_encode($tambon_json);
+        // end tambon
+        
+        
+              // Hos
+        $sql = " SELECT concat(t.hcode,'-',h.hosname) hos,t.lat,t.lon from geojson t 
+                 INNER JOIN chospital_amp h ON t.hcode = h.hoscode ";
+        $raw = \Yii::$app->db->createCommand($sql)->queryAll();
+        $hos_json =[];
+        foreach ($raw as $value) {
+            $hos_json[]=[
+                'type'=>'Feature',
+                'properties'=>[
+                    'HOS'=>$value['hos'],
+                    
+                ],
+                'geometry'=>[
+                    'type'=>'Point',
+                    'coordinates'=>[$value['lon']*1,$value['lat']*1],                    
+                ]
+            ];
+        }
+        $hos_json = json_encode($hos_json);
+        // end Hos
+        
+        
+        
         return $this->render('tambon',[
-            'geojson'=>$geojson
+            'tambon_json'=>$tambon_json,
+            'hos_json'=>$hos_json
         ]);
         
     }
