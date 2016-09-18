@@ -45,10 +45,7 @@ $js = <<<JS
         
     };
     
-        var labelHosOptions = {
-            opacity: 0,
-            fillOpacity: 0
-        };
+    
         
     var _group1 = L.layerGroup().addTo(map);
     var _group2 = L.layerGroup().addTo(map);
@@ -58,6 +55,11 @@ $js = <<<JS
         onEachFeature:function(feature,layer){         
             layer.bindPopup(feature.properties.TAM_NAMT);
             layer.bindLabel(feature.properties.TAM_NAMT);
+            layer.on({
+                    mouseover: highlightFeatureTamLayer,
+                    mouseout: resetHighlightTamLayer,
+                    click: zoomToFeature
+                });
          },
          
        }).addTo(_group1);
@@ -71,6 +73,7 @@ $js = <<<JS
                 layer.setIcon(L.mapbox.marker.icon({'marker-color': '#008000','marker-symbol':'h'})); 
                 layer.bindPopup(feature.properties.HOS);
                 //layer.bindLabel(feature.properties.HOS);
+                
                
            },
            
@@ -102,8 +105,7 @@ $js = <<<JS
 			hos_layer.resetStyle(layer);
 		});	
     });
-	
-	map.addControl( searchControl );  
+    map.addControl( searchControl );  
     
     // other function    
     function style(feature) {
@@ -116,6 +118,27 @@ $js = <<<JS
             fillOpacity: 0.7
         }
     } 
+        
+    function highlightFeatureTamLayer(e) {
+        var layer = e.target;
+        layer.setStyle({
+            weight: 5,
+            color: '#B5E61D',
+            dashArray: '',
+            fillOpacity: 0.7
+        });
+        if (!L.Browser.ie && !L.Browser.opera) {
+            layer.bringToFront();
+        }
+        
+    }
+    function resetHighlightTamLayer(e) {
+        tam_layer.resetStyle(e.target);
+        
+    }
+    function zoomToFeature(e) {
+        map.fitBounds(e.target.getBounds());
+    }
         
 JS;
 $this->registerJs($js);
