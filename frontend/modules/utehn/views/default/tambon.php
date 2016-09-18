@@ -2,9 +2,11 @@
 $this->title = "Tambon";
 $this->registerCssFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css', ['async' => false, 'defer' => true]);
 $this->registerCssFile('./lib-gis/leaflet-search.min.css',['async' => false, 'defer' => true]);
+$this->registerCssFile('./lib-gis/leaflet.label.css',['async' => false, 'defer' => true]);
 
 $this->registerJsFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js', ['position' => $this::POS_HEAD]);
 $this->registerJsFile('./lib-gis/leaflet-search.min.js',['position' => $this::POS_HEAD]);
+$this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEAD]);
 
 ?>
 
@@ -35,30 +37,43 @@ $js = <<<JS
     //var map = L.mapbox.map('map', 'mapbox.streets').setView([16, 100], 6);
     var map = L.mapbox.map('map');
         
+    //L.marker([16, 100]).bindLabel('Look revealing label!').addTo(map);
+        
      var baseLayers = {
 	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map),        
         "แผนที่ดาวเทียม": L.mapbox.tileLayer('mapbox.satellite'),
         
     };
+    
+        var labelHosOptions = {
+            opacity: 0,
+            fillOpacity: 0
+        };
         
     var _group1 = L.layerGroup().addTo(map);
     var _group2 = L.layerGroup().addTo(map);
          
     var tam_layer=L.geoJson($tambon_json,{
         style:style,
-        onEachFeature:function(feature,layer){             
-        
-                layer.bindPopup(feature.properties.TAM_NAMT);
-         }
-           
+        onEachFeature:function(feature,layer){         
+            layer.bindPopup(feature.properties.TAM_NAMT);
+            layer.bindLabel(feature.properties.TAM_NAMT);
+         },
+         
        }).addTo(_group1);
     map.fitBounds(tam_layer.getBounds());
     
-    var hos_layer =L.geoJson($hos_json,{
+
+       
+    var hos_layer =L.geoJson($hos_json,{                
+            
            onEachFeature:function(feature,layer){    
                 layer.setIcon(L.mapbox.marker.icon({'marker-color': '#008000','marker-symbol':'h'})); 
                 layer.bindPopup(feature.properties.HOS);
-           }
+                //layer.bindLabel(feature.properties.HOS);
+               
+           },
+           
     }).addTo(_group2);
         
     var overlays = {               
