@@ -29,6 +29,15 @@ $js = <<<JS
              
     L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
     var map = L.mapbox.map('map', 'mapbox.streets').setView([16, 100], 6);
+        
+     var baseLayers = {
+	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map)  ,
+        "แผนที่ดาวเทียม": L.mapbox.tileLayer('mapbox.satellite'),
+        
+    };
+        
+    var _group1 = L.layerGroup().addTo(map);
+    var _group2 = L.layerGroup().addTo(map);
     
     var tam_layer=L.geoJson($tambon_json,{
         style:style,
@@ -37,7 +46,7 @@ $js = <<<JS
                 layer.bindPopup(feature.properties.TAM_NAMT);
          }
            
-       }).addTo(map);
+       }).addTo(_group1);
     map.fitBounds(tam_layer.getBounds());
     
     var hos_layer =L.geoJson($hos_json,{
@@ -45,8 +54,17 @@ $js = <<<JS
                 layer.setIcon(L.mapbox.marker.icon({'marker-color': '$icon2'})); 
                 layer.bindPopup(feature.properties.HOS);
            }
-       }).addTo(map);
+       }).addTo(_group2);
         
+    var overlays = {
+                "หน่วยบริการ": _group2,
+                "ขอบเขตตำบล": _group1
+               
+            };
+        
+    L.control.layers(baseLayers,overlays).addTo(map);
+    
+    // other function    
     function style(feature) {
         return {
             fillColor: '#40ff00',
