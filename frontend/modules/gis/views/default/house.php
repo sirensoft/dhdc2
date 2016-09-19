@@ -15,16 +15,15 @@ $this->registerCssFile('https://api.mapbox.com/mapbox.js/plugins/leaflet-markerc
 ?>
 
 
-<div class="panel panel-danger">
+<div class="panel panel-info">
     <div class="panel-heading">
-        <b>แผนที่แสดงที่ตั้งหลังคาเรือนในเขตรับผิดชอบ</b>
-        <p></p>
+        <b>แผนที่แสดงที่ตั้งหลังคาเรือน</b>-[แฟ้ม HOME]       
     </div>
     <div class="panel-body" >
         <div id="map" style="width: 100%;height: 75vh;"></div>   
     </div>
     <div class="panel-footer" id="info">
-        ประสงค์ใช้งาน<b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b>กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">UTEHN PHNU</a>
+        <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b>กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">UTEHN PHNU</a>
         <?php
        // echo $house_json;
         ?>
@@ -39,7 +38,7 @@ $js = <<<JS
              
     L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
    
-    var map = L.mapbox.map('map');
+    var map = L.map('map');
         
    
         
@@ -49,12 +48,16 @@ $js = <<<JS
         
     };
         
-     //var clusterGroup = new L.MarkerClusterGroup();
+     var clusterGroup = new L.MarkerClusterGroup({
+        spiderfyOnMaxZoom: true,
+        showCoverageOnHover: true,
+        zoomToBoundsOnClick: true
+    });
     
     
         
-    var _group1 = L.layerGroup().addTo(map);
-    var _group2 = L.layerGroup().addTo(map);
+    var _group1 = L.layerGroup();
+    //var _group2 = L.layerGroup();
      
    //ตำบล
     var tam_layer=L.geoJson($tambon_json,{
@@ -72,25 +75,31 @@ $js = <<<JS
        }).addTo(_group1);
     map.fitBounds(tam_layer.getBounds());
     // จบตำบล
-
+    
+    var ic_house = L.icon({
+        iconUrl: './images/ic_house.png',
+        iconSize:     [28, 28],    
+        iconAnchor:   [20, 20],   
+        popupAnchor:  [-0, -20] 
+    });
        
     var house_layer =L.geoJson($house_json,{                
             
            onEachFeature:function(feature,layer){    
-                layer.setIcon(L.mapbox.marker.icon({'marker-color': '#82f217','marker-symbol':'h'})); 
+                //layer.setIcon(L.mapbox.marker.icon({'marker-color': '#82f217','marker-symbol':'h'})); 
+                layer.setIcon(ic_house); 
                 layer.bindPopup(feature.properties.FULL_HOUSE+'<br>'+'เจ้าบ้าน:-'+feature.properties.HEAD_NAME);               
                 
                
            },
            
-    }).addTo(_group2);
-        
+    }).addTo(clusterGroup);
    
     
         
     var overlays = {   
-        "หลังคาเรือน": _group2,
-        "ขอบเขตตำบล": _group1,
+        "หลังคาเรือน": clusterGroup.addTo(map),
+        "ขอบเขตตำบล": _group1.addTo(map),
         
                
     };
@@ -111,11 +120,11 @@ $js = <<<JS
 
     }).on('search:collapsed', function(e) {
 
-		hos_layer.eachLayer(function(layer) {	
-			hos_layer.resetStyle(layer);
+		house_layer.eachLayer(function(layer) {	
+			house_layer.resetStyle(layer);
 		});	
     });
-    map.addControl( searchControl );  
+    //map.addControl( searchControl );  
     
     // other function    
     function style(feature) {

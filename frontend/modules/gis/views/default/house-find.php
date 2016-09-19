@@ -8,12 +8,13 @@ $this->registerJsFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js', ['pos
 $this->registerJsFile('./lib-gis/leaflet-search.min.js',['position' => $this::POS_HEAD]);
 $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEAD]);
 
+
 ?>
 
 
 <div class="panel panel-info">
     <div class="panel-heading">
-        <b>แผนที่แสดงที่ตั้งหน่วยบริการ</b>-[พิกัดหน่วยบริการสังกัดกระทรวงสาธารณสุข]       
+        <b>แผนที่แสดงที่ตั้งหลังคาเรือน(ค้นหา)</b>-[แฟ้ม HOME]       
     </div>
     <div class="panel-body" >
         <div id="map" style="width: 100%;height: 75vh;"></div>   
@@ -21,7 +22,7 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
     <div class="panel-footer" id="info">
         <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b>กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">UTEHN PHNU</a>
         <?php
-        //echo $hos_json;
+       // echo $house_json;
         ?>
         
     </div>
@@ -29,28 +30,28 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 
 
 <?php
-$icon1 = "#40ff00";
-$icon2 = "#3366ff";
-$icon3 = "#ff3300";
+
 $js = <<<JS
              
     L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
-    //var map = L.mapbox.map('map', 'mapbox.streets').setView([16, 100], 6);
-    var map = L.mapbox.map('map');
+   
+    var map = L.map('map');
         
-    //L.marker([16, 100]).bindLabel('Look revealing label!').addTo(map);
+   
         
      var baseLayers = {
 	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map),        
         "แผนที่ดาวเทียม": L.mapbox.tileLayer('mapbox.satellite'),
         
     };
+  
     
     
         
-    var _group1 = L.layerGroup().addTo(map);
-    var _group2 = L.layerGroup().addTo(map);
-         
+    var _group1 = L.layerGroup();
+    var _group2 = L.layerGroup();
+     
+   //ตำบล
     var tam_layer=L.geoJson($tambon_json,{
         style:style,
         onEachFeature:function(feature,layer){         
@@ -65,24 +66,33 @@ $js = <<<JS
          
        }).addTo(_group1);
     map.fitBounds(tam_layer.getBounds());
+    // จบตำบล
     
-
+    var ic_house = L.icon({
+        iconUrl: './images/ic_house.png',
+        iconSize:     [28, 28],    
+        iconAnchor:   [20, 20],   
+        popupAnchor:  [-0, -20] 
+    });
        
-    var hos_layer =L.geoJson($hos_json,{                
+    var house_layer =L.geoJson($house_json,{                
             
            onEachFeature:function(feature,layer){    
-                layer.setIcon(L.mapbox.marker.icon({'marker-color': '#f25a17','marker-symbol':'h'})); 
-                layer.bindPopup(feature.properties.HOS);
-                //layer.bindLabel(feature.properties.HOS);
+                //layer.setIcon(L.mapbox.marker.icon({'marker-color': '#82f217','marker-symbol':'h'})); 
+                layer.setIcon(ic_house); 
+                layer.bindPopup(feature.properties.FULL_HOUSE+'<br>'+'เจ้าบ้าน:-'+feature.properties.HEAD_NAME);               
                 
                
            },
            
     }).addTo(_group2);
+   
+    
         
-    var overlays = {               
-        "ขอบเขตตำบล": _group1,
-        "หน่วยบริการ": _group2,
+    var overlays = {   
+        "หลังคาเรือน": _group2.addTo(map),
+        "ขอบเขตตำบล": _group1.addTo(map),
+        
                
     };
         
@@ -90,7 +100,7 @@ $js = <<<JS
       
     //search
     var searchControl = new L.Control.Search({
-		layer: hos_layer,
+		layer: house_layer,
 		propertyName: 'SEARCH_TEXT',
 		circleLocation: false,
 		
@@ -102,8 +112,8 @@ $js = <<<JS
 
     }).on('search:collapsed', function(e) {
 
-		hos_layer.eachLayer(function(layer) {	
-			hos_layer.resetStyle(layer);
+		house_layer.eachLayer(function(layer) {	
+			house_layer.resetStyle(layer);
 		});	
     });
     map.addControl( searchControl );  
