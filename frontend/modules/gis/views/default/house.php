@@ -1,5 +1,5 @@
 <?php
-$this->title = "DHDC2:แผนที่แสดงที่ตั้งหน่วยบริการ";
+$this->title = "DHDC2:GIS";
 $this->registerCssFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css', ['async' => false, 'defer' => true]);
 $this->registerCssFile('./lib-gis/leaflet-search.min.css',['async' => false, 'defer' => true]);
 $this->registerCssFile('./lib-gis/leaflet.label.css',['async' => false, 'defer' => true]);
@@ -7,6 +7,10 @@ $this->registerCssFile('./lib-gis/leaflet.label.css',['async' => false, 'defer' 
 $this->registerJsFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js', ['position' => $this::POS_HEAD]);
 $this->registerJsFile('./lib-gis/leaflet-search.min.js',['position' => $this::POS_HEAD]);
 $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEAD]);
+
+$this->registerJsFile('https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/leaflet.markercluster.js',['position' => $this::POS_HEAD]);
+$this->registerCssFile('https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.css',['async' => false, 'defer' => true]);
+$this->registerCssFile('https://api.mapbox.com/mapbox.js/plugins/leaflet-markercluster/v0.4.0/MarkerCluster.Default.css',['async' => false, 'defer' => true]);
 
 ?>
 
@@ -30,28 +34,29 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 
 
 <?php
-$icon1 = "#40ff00";
-$icon2 = "#3366ff";
-$icon3 = "#ff3300";
+
 $js = <<<JS
              
     L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
-    //var map = L.mapbox.map('map', 'mapbox.streets').setView([16, 100], 6);
+   
     var map = L.mapbox.map('map');
         
-    //L.marker([16, 100]).bindLabel('Look revealing label!').addTo(map);
+   
         
      var baseLayers = {
 	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map),        
         "แผนที่ดาวเทียม": L.mapbox.tileLayer('mapbox.satellite'),
         
     };
+        
+     //var clusterGroup = new L.MarkerClusterGroup();
     
     
         
     var _group1 = L.layerGroup().addTo(map);
     var _group2 = L.layerGroup().addTo(map);
-         
+     
+   //ตำบล
     var tam_layer=L.geoJson($tambon_json,{
         style:style,
         onEachFeature:function(feature,layer){         
@@ -66,23 +71,27 @@ $js = <<<JS
          
        }).addTo(_group1);
     map.fitBounds(tam_layer.getBounds());
-    
+    // จบตำบล
 
        
     var house_layer =L.geoJson($house_json,{                
             
            onEachFeature:function(feature,layer){    
                 layer.setIcon(L.mapbox.marker.icon({'marker-color': '#82f217','marker-symbol':'h'})); 
-                layer.bindPopup(feature.properties.FULL_HOUSE);               
+                layer.bindPopup(feature.properties.FULL_HOUSE+'<br>'+'เจ้าบ้าน:-'+feature.properties.HEAD_NAME);               
                 
                
            },
            
     }).addTo(_group2);
         
-    var overlays = {               
-        "ขอบเขตตำบล": _group1,
+   
+    
+        
+    var overlays = {   
         "หลังคาเรือน": _group2,
+        "ขอบเขตตำบล": _group1,
+        
                
     };
         

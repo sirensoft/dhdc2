@@ -1,5 +1,5 @@
 <?php
-$this->title = "DHDC2:แผนที่แสดงที่ตั้งหน่วยบริการ";
+$this->title = "DHDC2:GIS";
 $this->registerCssFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.css', ['async' => false, 'defer' => true]);
 $this->registerCssFile('./lib-gis/leaflet-search.min.css',['async' => false, 'defer' => true]);
 $this->registerCssFile('./lib-gis/leaflet.label.css',['async' => false, 'defer' => true]);

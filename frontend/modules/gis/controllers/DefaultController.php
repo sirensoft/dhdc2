@@ -99,7 +99,7 @@ class DefaultController extends AppController {
         // end tambon
         
         //House
-        $sql = " SELECT concat(t.HOUSE,' ม.',t.VILLAGE,' ต.',t.TAMBON_NAMT) FULL_HOUSE,t.LATITUDE,t.LONGITUDE from t_house_gis t WHERE t.GIS = 'Y' ";
+        $sql = " SELECT concat(t.HOUSE,' ม.',t.VILLAGE,' ต.',t.TAMBON_NAMT) FULL_HOUSE,t.HEAD_NAME,t.LATITUDE,t.LONGITUDE from t_house_gis t WHERE t.GIS = 'Y' ";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $house_json = [];
         foreach ($raw as $value) {
@@ -107,7 +107,9 @@ class DefaultController extends AppController {
                 'type' => 'Feature',
                 'properties' => [
                     'FULL_HOUSE' => $value['FULL_HOUSE'],
+                    'HEAD_NAME' => $value['HEAD_NAME'],
                     'SEARCH_TEXT' => $value['FULL_HOUSE'],
+                    
                 ],
                 'geometry' => [
                     'type' => 'Point',
