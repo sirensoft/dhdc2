@@ -25,6 +25,7 @@ class DefaultController extends AppController {
     }
 
     public function actionHos() {
+        $this->permitRole([1, 2]);
         $this->layout = 'gis';
         $config_main = Sysconfigmain::find()->one();
         $amp = $config_main->district_code;
@@ -76,6 +77,7 @@ class DefaultController extends AppController {
     }
 
     public function actionHouse(){
+        $this->permitRole([1, 2]);
         $this->layout = 'gis';
         $config_main = Sysconfigmain::find()->one();
         $amp = $config_main->district_code;
@@ -151,6 +153,7 @@ class DefaultController extends AppController {
     }
     
      public function actionHouseFind(){
+        $this->permitRole([1, 2]);
         $this->layout = 'gis';
         $config_main = Sysconfigmain::find()->one();
         $amp = $config_main->district_code;
