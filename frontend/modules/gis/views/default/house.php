@@ -23,7 +23,7 @@ $this->registerCssFile('https://api.mapbox.com/mapbox.js/plugins/leaflet-markerc
         <div id="map" style="width: 100%;height: 75vh;"></div>   
     </div>
     <div class="panel-footer" id="info">
-        <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b>กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">UTEHN PHNU</a>
+        <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b>กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">TEAM</a>
         <?php
        // echo $house_json;
         ?>
