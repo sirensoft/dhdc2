@@ -13,7 +13,7 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 
 <div class="panel panel-danger">
     <div class="panel-heading">
-        <b>แผนที่แสดงที่ตั้งหน่วยบริการ</b>
+        <b>แผนที่แสดงที่ตั้งหลังคาเรือนในเขตรับผิดชอบ</b>
         <p></p>
     </div>
     <div class="panel-body" >
@@ -22,7 +22,7 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
     <div class="panel-footer" id="info">
         ประสงค์ใช้งาน<b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b>กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">UTEHN PHNU</a>
         <?php
-        //echo $hos_json;
+       // echo $house_json;
         ?>
         
     </div>
@@ -69,12 +69,11 @@ $js = <<<JS
     
 
        
-    var hos_layer =L.geoJson($hos_json,{                
+    var house_layer =L.geoJson($house_json,{                
             
            onEachFeature:function(feature,layer){    
-                layer.setIcon(L.mapbox.marker.icon({'marker-color': '#f25a17','marker-symbol':'h'})); 
-                layer.bindPopup(feature.properties.HOS);
-                //layer.bindLabel(feature.properties.HOS);
+                layer.setIcon(L.mapbox.marker.icon({'marker-color': '#82f217','marker-symbol':'h'})); 
+                layer.bindPopup(feature.properties.FULL_HOUSE);               
                 
                
            },
@@ -83,7 +82,7 @@ $js = <<<JS
         
     var overlays = {               
         "ขอบเขตตำบล": _group1,
-        "หน่วยบริการ": _group2,
+        "หลังคาเรือน": _group2,
                
     };
         
@@ -91,7 +90,7 @@ $js = <<<JS
       
     //search
     var searchControl = new L.Control.Search({
-		layer: hos_layer,
+		layer: house_layer,
 		propertyName: 'SEARCH_TEXT',
 		circleLocation: false,
 		

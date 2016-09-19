@@ -28,7 +28,8 @@ class DefaultController extends AppController {
         $this->layout = 'gis';
         $config_main = Sysconfigmain::find()->one();
         $amp = $config_main->district_code;
-
+        
+        //tambon
         $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE)='$amp'";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $tambon_json = [];
@@ -46,6 +47,7 @@ class DefaultController extends AppController {
         }
         $tambon_json = json_encode($tambon_json);
         // end tambon
+        
         // Hos
         $sql = " SELECT h.hosname,concat(t.hcode,'-',h.hosname) hos,t.lat,t.lon from geojson t 
                  INNER JOIN chospital_amp h ON t.hcode = h.hoscode ";
@@ -73,4 +75,53 @@ class DefaultController extends AppController {
         ]);
     }
 
+    public function actionHouse(){
+        $this->layout = 'gis';
+        $config_main = Sysconfigmain::find()->one();
+        $amp = $config_main->district_code;
+          //tambon
+        $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE)='$amp'";
+        $raw = \Yii::$app->db->createCommand($sql)->queryAll();
+        $tambon_json = [];
+        foreach ($raw as $value) {
+            $tambon_json[] = [
+                'type' => 'Feature',
+                'properties' => [
+                    'TAM_NAMT' => "ต." . $value['TAM_NAMT'],
+                ],
+                'geometry' => [
+                    'type' => 'MultiPolygon',
+                    'coordinates' => json_decode($value['COORDINATES']),
+                ]
+            ];
+        }
+        $tambon_json = json_encode($tambon_json);
+        // end tambon
+        
+        //House
+        $sql = " SELECT concat(t.HOUSE,' ม.',t.VILLAGE,' ต.',t.TAMBON_NAMT) FULL_HOUSE,t.LATITUDE,t.LONGITUDE from t_house_gis t WHERE t.GIS = 'Y' ";
+        $raw = \Yii::$app->db->createCommand($sql)->queryAll();
+        $house_json = [];
+        foreach ($raw as $value) {
+            $house_json[] = [
+                'type' => 'Feature',
+                'properties' => [
+                    'FULL_HOUSE' => $value['FULL_HOUSE'],
+                    'SEARCH_TEXT' => $value['FULL_HOUSE'],
+                ],
+                'geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => [$value['LONGITUDE'] * 1,$value['LATITUDE'] * 1],
+                ]
+            ];
+        }
+        $house_json = json_encode($house_json);
+        // end House
+        
+        return $this->render('house', [
+                    'tambon_json' => $tambon_json,
+                    'house_json' => $house_json,
+                   
+        ]);
+    }
 }
