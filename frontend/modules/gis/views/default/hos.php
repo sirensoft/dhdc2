@@ -14,7 +14,7 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 <div class="panel panel-danger">
     <div class="panel-heading">
         <b>แผนที่แสดงที่ตั้งหน่วยบริการ</b>
-        <p> ... </p>
+        <p></p>
     </div>
     <div class="panel-body">
         <div id="map" style="width: 100%;height: 460px"></div>   
