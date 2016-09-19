@@ -1,12 +1,12 @@
 <?php
 
 use yii\helpers\Html;
-use frontend\assets\AppAsset;
+use frontend\assets\CustomAsset;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
 
-AppAsset::register($this);
+CustomAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
