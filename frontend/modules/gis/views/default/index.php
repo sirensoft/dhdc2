@@ -1,7 +1,7 @@
 <?php
 
 use yii\helpers\Html;
-
+$this->title = "DHDC2:GIS";
 $this->params['breadcrumbs'][] = 'ระบบข้อมูลแผนที่(GIS)'
 ?>
 <div class="gis-default-index">
@@ -15,11 +15,9 @@ $this->params['breadcrumbs'][] = 'ระบบข้อมูลแผนที�
         <?= Html::a('3) ค้นหาบ้าน', ['/gis/default/house-find'],['target'=>'_blank']); ?>
     </p>
     <p>
-        <?= Html::a('4) แผนที่แสดงผู้ป่วยด้วยโรคติดต่อ', ['/gis/default/cd'],['target'=>'_blank']); ?>
+        <?= Html::a('4) อัตราป่วยด้วยโรคติดต่อ', ['/gis/default/disease'],['target'=>'_blank']); ?>
     </p>
-    <p>
-        <?= Html::a('5) แผนที่แสดงผู้ป่วยด้วยโรคไม่ติดต่อ', ['/gis/default/ncd'],['target'=>'_blank']); ?>
-    </p>
+    
 
 </div>
 <div style="margin-top: 100px" class="alert alert-danger">
