@@ -50,6 +50,7 @@ $js = <<<JS
         
     var _group1 = L.layerGroup();
     var _group2 = L.layerGroup();
+    var _group3 = L.layerGroup();
      
    //ตำบล
     var tam_layer=L.geoJson($tambon_json,{
@@ -68,6 +69,7 @@ $js = <<<JS
     map.fitBounds(tam_layer.getBounds());
     // จบตำบล
     
+    //house
     var ic_house = L.icon({
         iconUrl: './images/ic_house.png',
         iconSize:     [28, 28],    
@@ -87,11 +89,26 @@ $js = <<<JS
            
     }).addTo(_group2);
    
-    
+    // จบ house
+        
+    //hos
+     var hos_layer =L.geoJson($hos_json,{                
+            
+           onEachFeature:function(feature,layer){    
+                layer.setIcon(L.mapbox.marker.icon({'marker-color': '#09945f','marker-symbol':'h'})); 
+                layer.bindPopup(feature.properties.HOS);
+                //layer.bindLabel(feature.properties.HOS);
+                
+               
+           },
+           
+    }).addTo(_group3);
+    //จบ hos
         
     var overlays = {   
         "หลังคาเรือน": _group2.addTo(map),
         "ขอบเขตตำบล": _group1.addTo(map),
+        "หน่วยบริการ":_group3
         
                
     };

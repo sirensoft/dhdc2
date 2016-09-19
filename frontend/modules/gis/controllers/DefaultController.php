@@ -176,6 +176,27 @@ class DefaultController extends AppController {
         $tambon_json = json_encode($tambon_json);
         // end tambon
         
+        // Hos
+        $sql = " SELECT h.hosname,concat(t.hcode,'-',h.hosname) hos,t.lat,t.lon from geojson t 
+                 INNER JOIN chospital_amp h ON t.hcode = h.hoscode ";
+        $raw = \Yii::$app->db->createCommand($sql)->queryAll();
+        $hos_json = [];
+        foreach ($raw as $value) {
+            $hos_json[] = [
+                'type' => 'Feature',
+                'properties' => [
+                    'HOS' => $value['hos'],
+                    //'SEARCH_TEXT' => $value['hosname'],
+                ],
+                'geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => [$value['lon'] * 1, $value['lat'] * 1],
+                ]
+            ];
+        }
+        $hos_json = json_encode($hos_json);
+        // end Hos
+        
         //House
         $sql = " SELECT concat(t.HOUSE,' ม.',t.VILLAGE,' ต.',t.TAMBON_NAMT) FULL_HOUSE,t.HEAD_NAME,t.LATITUDE,t.LONGITUDE from t_house_gis t WHERE t.GIS = 'Y' ";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
@@ -201,7 +222,7 @@ class DefaultController extends AppController {
         return $this->render('house-find', [
                     'tambon_json' => $tambon_json,
                     'house_json' => $house_json,
-                   
+                    'hos_json'=>$hos_json                   
         ]);
     }
 }
