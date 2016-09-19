@@ -19,7 +19,7 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
         <div id="map" style="width: 100%;height: 75vh;"></div>   
     </div>
     <div class="panel-footer" id="info">
-        <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b> กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">TEAM</a>
+        <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b> กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">ผู้พัฒนา</a>
         <?php
         //echo $hos_json;
         ?>
@@ -71,7 +71,7 @@ $js = <<<JS
     var hos_layer =L.geoJson($hos_json,{                
             
            onEachFeature:function(feature,layer){    
-                layer.setIcon(L.mapbox.marker.icon({'marker-color': '#f25a17','marker-symbol':'h'})); 
+                layer.setIcon(L.mapbox.marker.icon({'marker-color': '#09945f','marker-symbol':'h'})); 
                 layer.bindPopup(feature.properties.HOS);
                 //layer.bindLabel(feature.properties.HOS);
                 

@@ -23,7 +23,7 @@ $this->registerCssFile('https://api.mapbox.com/mapbox.js/plugins/leaflet-markerc
         <div id="map" style="width: 100%;height: 75vh;"></div>   
     </div>
     <div class="panel-footer" id="info">
-        <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b> กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">TEAM</a>
+        <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b> กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">ผู้พัฒนา</a>
         <?php
        // echo $house_json;
         ?>
@@ -57,7 +57,7 @@ $js = <<<JS
     
         
     var _group1 = L.layerGroup();
-    //var _group2 = L.layerGroup();
+    var _group2 = L.layerGroup();
      
    //ตำบล
     var tam_layer=L.geoJson($tambon_json,{
@@ -76,6 +76,7 @@ $js = <<<JS
     map.fitBounds(tam_layer.getBounds());
     // จบตำบล
     
+    //house
     var ic_house = L.icon({
         iconUrl: './images/ic_house.png',
         iconSize:     [28, 28],    
@@ -94,12 +95,27 @@ $js = <<<JS
            },
            
     }).addTo(clusterGroup);
-   
+    // จบ house
+    
+    //hos
+    var hos_layer =L.geoJson($hos_json,{                
+            
+           onEachFeature:function(feature,layer){    
+                layer.setIcon(L.mapbox.marker.icon({'marker-color': '#09945f','marker-symbol':'h'})); 
+                layer.bindPopup(feature.properties.HOS);
+                //layer.bindLabel(feature.properties.HOS);
+                
+               
+           },
+           
+    }).addTo(_group2);
+    //จบ hos
     
         
     var overlays = {   
         "หลังคาเรือน": clusterGroup.addTo(map),
         "ขอบเขตตำบล": _group1.addTo(map),
+        "หน่วยบริการ":_group2
         
                
     };

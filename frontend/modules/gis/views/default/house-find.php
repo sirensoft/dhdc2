@@ -20,7 +20,7 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
         <div id="map" style="width: 100%;height: 75vh;"></div>   
     </div>
     <div class="panel-footer" id="info">
-        <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b> กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">TEAM</a>
+        <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b> กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">ผู้พัฒนา</a>
         <?php
        // echo $house_json;
         ?>
