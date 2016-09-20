@@ -46,9 +46,6 @@ class DefaultController extends AppController {
         return $this->render('dhf');
     }
 
-    public function actionTestKeys() {
-        
-    }
 
     public function actionHos() {
         $this->permitRole([1, 2]);
