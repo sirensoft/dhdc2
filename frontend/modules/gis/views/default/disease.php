@@ -223,6 +223,21 @@ $js = <<<JS
         map.fitBounds(e.target.getBounds());
     }
         
+    // legend
+    var legend = L.control({position: 'bottomleft'});
+    legend.onAdd = function (map) {
+        var div = L.DomUtil.create('div', 'info legend');
+        var labels = ['<b>คำอธิบาย</b>'];
+         labels.push('<i style="background:#FF0000"></i>>= 1000 ต่อแสน ปชก.');
+        labels.push('<i style="background:#FFA500"></i>>= 100 ต่อแสน ปชก.');
+        labels.push('<i style="background:#FFFF00"></i>> 0 ต่อแสน ปชก.');
+        labels.push('<i style="background:#41e164"></i>ไม่พบผู้ป่วย');
+        div.innerHTML = labels.join('<br>');
+        return div;
+    };
+    legend.addTo(map);
+    //end legend
+        
 JS;
 $this->registerJs($js);
 ?>
