@@ -249,13 +249,19 @@ class DefaultController extends AppController {
         $config_main = Sysconfigmain::find()->one();
         $amp = $config_main->district_code;
         //tambon
-        $sql = " SET @b_year:=(SELECT yearprocess FROM sys_config LIMIT 1)+543;
+        $sql = "  SET @b_year:=(SELECT yearprocess FROM sys_config LIMIT 1)+543;
 SET @amp_code := (SELECT t.district_code FROM sys_config_main t limit 1);
 SET @rate = 100000;
 SET @code506  = '$disease';
 
 SELECT t.PROV_CODE,t.AMP_CODE,t.TAM_CODE,t.TAM_NAMT,t.COORDINATES,a.PATIENT,c.POP 
 ,ROUND((a.PATIENT/c.POP)*@rate,2) RATE
+,CASE  
+WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) BETWEEN 0 		AND 999 	THEN '41e164'
+WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) BETWEEN 1000 AND 1499 	THEN 'FFFF00'
+WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) BETWEEN 1500 AND 2000 	THEN 'FFA500'
+WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) > 2000 THEN 'FF0000'
+END as 'COLOR'
 FROM gis_dhdc t 
 LEFT JOIN (
 	SELECT LEFT(d.areacode,6) AREACODE,COUNT(d.hospcode) PATIENT FROM t_surveil d 
@@ -267,7 +273,7 @@ LEFT JOIN (
 	WHERE LEFT(t.villcode,4) = @amp_code AND t.yearmonth = concat(@b_year,'01')
 	GROUP BY LEFT(t.villcode,6)
 ) c ON CONCAT(t.PROV_CODE,t.AMP_CODE,t.TAM_CODE) = c.AREACODE
-WHERE CONCAT(t.PROV_CODE,t.AMP_CODE) = @amp_code ;";
+WHERE CONCAT(t.PROV_CODE,t.AMP_CODE) = @amp_code ;  ";
 
         $this->exec_sql("DROP PROCEDURE IF EXISTS gis_disease_$disease;");
 
@@ -285,7 +291,8 @@ WHERE CONCAT(t.PROV_CODE,t.AMP_CODE) = @amp_code ;";
                 'properties' => [
                     'TAM_NAMT' => "ต." . $value['TAM_NAMT'],
                     'PATIENT'=> "ป่วย ".$value['PATIENT']." ราย",
-                    'RATE'=>"อัตรา ".$value['RATE'].' ต่อแสน ปชก.'
+                    'RATE'=>"อัตรา ".$value['RATE'].' ต่อแสน ปชก.',
+                    'COLOR'=>"#".$value['COLOR']
                 ],
                 'geometry' => [
                     'type' => 'MultiPolygon',

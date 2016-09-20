@@ -14,7 +14,7 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 
 <div class="panel panel-info">
     <div class="panel-heading">
-        <b>แผนที่แสดงการเจ็บป่วยด้วยโรค.....</b>-[แฟ้ม DIAGNOSIS_OPD(IPD)]       
+        <b>แผนที่แสดงการเจ็บป่วยด้วยโรค.....</b>-[ตาราง: t_surveil]       
     </div>
     <div class="panel-body" >
         <div id="map" style="width: 100%;height: 75vh;"></div>   
@@ -36,8 +36,7 @@ $js = <<<JS
     L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
    
     var map = L.map('map');
-        
-   
+          
         
      var baseLayers = {
 	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map),        
@@ -142,7 +141,7 @@ $js = <<<JS
     // other function    
     function style(feature) {
         return {
-            fillColor: '#4169E1',
+            fillColor: feature.properties.COLOR,
             weight: 2,
             opacity: 1,
             color: 'white',
