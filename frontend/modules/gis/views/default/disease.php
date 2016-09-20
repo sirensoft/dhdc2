@@ -14,13 +14,19 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 
 <div class="panel panel-info">
     <div class="panel-heading">
-        <b>แผนที่แสดงการเจ็บป่วยด้วยโรค.....
+        <b>แผนที่แสดงการเจ็บป่วยด้วยโรค...
+            <?php
+        $sql = "SELECT CONCAT(t.group506code,'-',t.group506name) dis from cdisease506 t
+WHERE t.group506code = '$dis'";
+        $raw=\Yii::$app->db->createCommand($sql)->queryOne();
+        echo "<u>".$raw['dis']."</u>";
+        ?>...
         <?php
         $sql = "SELECT t.yearprocess+543 'byear' FROM sys_config t limit 1";
         $raw=\Yii::$app->db->createCommand($sql)->queryOne();
         echo "ปี ".$raw['byear'];
         ?>
-        </b>-[ตาราง: t_surveil]       
+        </b>-[ตาราง: t_surveil,cmidyearpop]       
     </div>
     <div class="panel-body" >
         <div id="map" style="width: 100%;height: 75vh;"></div>   
