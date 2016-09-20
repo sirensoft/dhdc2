@@ -14,7 +14,13 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 
 <div class="panel panel-info">
     <div class="panel-heading">
-        <b>แผนที่แสดงการเจ็บป่วยด้วยโรค.....</b>-[ตาราง: t_surveil]       
+        <b>แผนที่แสดงการเจ็บป่วยด้วยโรค.....
+        <?php
+        $sql = "SELECT t.yearprocess+543 'byear' FROM sys_config t limit 1";
+        $raw=\Yii::$app->db->createCommand($sql)->queryOne();
+        echo "ปี ".$raw['byear'];
+        ?>
+        </b>-[ตาราง: t_surveil]       
     </div>
     <div class="panel-body" >
         <div id="map" style="width: 100%;height: 75vh;"></div>   
