@@ -57,7 +57,10 @@ $js = <<<JS
         style:style,
         onEachFeature:function(feature,layer){         
             //layer.bindPopup(feature.properties.TAM_NAMT);
-            layer.bindLabel(feature.properties.TAM_NAMT);
+            var label = feature.properties.TAM_NAMT+'<br>';               
+                label = label+ feature.properties.PATIENT+'<br>';
+                label = label+ feature.properties.RATE;
+            layer.bindLabel(label);
             layer.on({
                     mouseover: highlightFeatureTamLayer,
                     mouseout: resetHighlightTamLayer,
