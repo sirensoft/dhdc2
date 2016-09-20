@@ -4,6 +4,7 @@ namespace frontend\modules\gis\controllers;
 
 use common\components\AppController;
 use backend\models\Sysconfigmain;
+use yii\data\ArrayDataProvider;
 
 class DefaultController extends AppController {
 
@@ -257,11 +258,14 @@ SET @code506  = '$disease';
 SELECT t.PROV_CODE,t.AMP_CODE,t.TAM_CODE,t.TAM_NAMT,t.COORDINATES,a.PATIENT,c.POP 
 ,ROUND((a.PATIENT/c.POP)*@rate,2) RATE
 ,CASE 
+
+WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) >=  1000 THEN 'FF0000'
+WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) >=  100   THEN 'FFA500'
+WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) >  0	THEN 'FFFF00'
+WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) = 0	THEN '41e164'
 WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) IS NULL 	 THEN '41e164'
-WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) BETWEEN 0 AND 999 	THEN '41e164'
-WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) BETWEEN 1000 AND 1499 	THEN 'FFFF00'
-WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) BETWEEN 1500 AND 2000 	THEN 'FFA500'
-WHEN  ROUND((a.PATIENT/c.POP)*@rate,2) > 2000 THEN 'FF0000'
+
+
 END as 'COLOR'
 FROM gis_dhdc t 
 LEFT JOIN (
@@ -283,8 +287,12 @@ WHERE CONCAT(t.PROV_CODE,t.AMP_CODE) = @amp_code ;  ";
         $sp.= trim($sql);
         $sp.=" \r\n END";
         $this->exec_sql($sp);
-
         $raw = $this->call("gis_disease_$disease");
+        
+        $dataProvider = new ArrayDataProvider([
+            'allModels'=>$raw
+        ]);
+        
         $tambon_json = [];
         foreach ($raw as $value) {
             $tambon_json[] = [
@@ -348,7 +356,8 @@ WHERE CONCAT(t.PROV_CODE,t.AMP_CODE) = @amp_code ;  ";
                     'tambon_json' => $tambon_json,
                     'house_json' => $house_json,
                     'hos_json' => $hos_json,
-                    'disease'=>$disease
+                    'disease'=>$disease,
+                    'dataProvider'=>$dataProvider
         ]);
     }
 

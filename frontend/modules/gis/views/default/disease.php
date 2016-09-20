@@ -12,6 +12,7 @@ use yii\widgets\ActiveForm;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\helpers\Url;
+use kartik\grid\GridView;
 
 ?>
 
@@ -62,6 +63,21 @@ use yii\helpers\Url;
         ?>
         
     </div>
+</div>
+
+<div class="panel panel-success">
+    <?php
+    echo GridView::widget([
+        'dataProvider'=>$dataProvider,
+        'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '0'],
+        'columns'=>[
+            ['attribute' =>'TAM_NAMT','label'=>'ตำบล'],
+            ['attribute'=>'POP','label'=>'ประชากร'],
+            ['attribute'=>'PATIENT','label'=>'ผู้ป่วย(ราย)'],
+            ['attribute'=>'RATE','label'=>'อัตราต่อแสน']
+        ]
+    ]);
+    ?>
 </div>
 
 
