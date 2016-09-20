@@ -43,13 +43,8 @@ use yii\helpers\Url;
         
      
         
-        <b>แผนที่แสดงการเจ็บป่วยด้วยโรค...
-            <?php
-        $sql = "SELECT CONCAT(t.group506code,'-',t.group506name) dis from cdisease506 t
-WHERE t.group506code = '$disease'";
-        $raw=\Yii::$app->db->createCommand($sql)->queryOne();
-        echo "<u>".$raw['dis']."</u>";
-        ?>...
+        <b>
+
         <?php
         $sql = "SELECT t.yearprocess+543 'byear' FROM sys_config t limit 1";
         $raw=\Yii::$app->db->createCommand($sql)->queryOne();
