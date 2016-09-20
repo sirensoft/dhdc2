@@ -348,7 +348,7 @@ WHERE CONCAT(t.PROV_CODE,t.AMP_CODE) = @amp_code ;  ";
                     'tambon_json' => $tambon_json,
                     'house_json' => $house_json,
                     'hos_json' => $hos_json,
-                    'dis'=>$disease
+                    'disease'=>$disease
         ]);
     }
 

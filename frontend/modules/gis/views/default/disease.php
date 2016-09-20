@@ -8,16 +8,45 @@ $this->registerJsFile('https://api.mapbox.com/mapbox.js/v2.4.0/mapbox.js', ['pos
 $this->registerJsFile('./lib-gis/leaflet-search.min.js',['position' => $this::POS_HEAD]);
 $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEAD]);
 
+use yii\widgets\ActiveForm;
+use yii\helpers\ArrayHelper;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
 ?>
 
 
 <div class="panel panel-info">
     <div class="panel-heading">
+        
+    <?php
+    
+    
+    ActiveForm::begin([
+        'method' => 'get',
+        'action' => Url::to(['/gis/default/disease']),
+    ]);
+    ?>
+    <?php
+    $sql = " SELECT t.group506code CODE506,CONCAT(t.group506code,'-',t.group506name) DIS from cdisease506 t ";
+    $rawData = Yii::$app->db->createCommand($sql)->queryAll();
+    $items = ArrayHelper::map($rawData, 'CODE506', 'DIS');
+    echo Html::dropDownList('disease', $disease, $items, ['prompt' => '--- โรค ---']);
+       
+    
+    ?>
+    
+     <?php
+    echo Html::submitButton(' ตกลง ', ['class' => 'btn btn-danger']);
+    ActiveForm::end();
+    ?>
+        
+     
+        
         <b>แผนที่แสดงการเจ็บป่วยด้วยโรค...
             <?php
         $sql = "SELECT CONCAT(t.group506code,'-',t.group506name) dis from cdisease506 t
-WHERE t.group506code = '$dis'";
+WHERE t.group506code = '$disease'";
         $raw=\Yii::$app->db->createCommand($sql)->queryOne();
         echo "<u>".$raw['dis']."</u>";
         ?>...
