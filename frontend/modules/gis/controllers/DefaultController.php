@@ -54,7 +54,8 @@ class DefaultController extends AppController {
         $amp = $config_main->district_code;
 
         //tambon
-        $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE)='$amp'";
+        $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE) ";
+        $sql.= "in (SELECT DISTINCT district_code FROM sys_config_main)";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $tambon_json = [];
         foreach ($raw as $value) {
@@ -105,7 +106,8 @@ class DefaultController extends AppController {
         $amp = $config_main->district_code;
 
         //tambon
-        $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE)='$amp'";
+         $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE) ";
+        $sql.= "in (SELECT DISTINCT district_code FROM sys_config_main)";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $tambon_json = [];
         foreach ($raw as $value) {
@@ -176,7 +178,8 @@ class DefaultController extends AppController {
         $config_main = Sysconfigmain::find()->one();
         $amp = $config_main->district_code;
         //tambon
-        $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE)='$amp'";
+         $sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE) ";
+        $sql.= "in (SELECT DISTINCT district_code FROM sys_config_main)";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $tambon_json = [];
         foreach ($raw as $value) {
@@ -272,10 +275,10 @@ LEFT JOIN (
 ) a  ON CONCAT(t.PROV_CODE,t.AMP_CODE,t.TAM_CODE) = a.AREACODE
 LEFT JOIN ( 
 	SELECT LEFT(t.villcode,6) AREACODE,sum(t.total) POP FROM cmidyearpop t 
-	WHERE LEFT(t.villcode,4) = @amp_code AND t.yearmonth = concat(@b_year,'01')
+	WHERE LEFT(t.villcode,4) in (SELECT DISTINCT district_code FROM sys_config_main) AND t.yearmonth = concat(@b_year,'01')
 	GROUP BY LEFT(t.villcode,6)
 ) c ON CONCAT(t.PROV_CODE,t.AMP_CODE,t.TAM_CODE) = c.AREACODE
-WHERE CONCAT(t.PROV_CODE,t.AMP_CODE) = @amp_code ;  ";
+WHERE CONCAT(t.PROV_CODE,t.AMP_CODE) in (SELECT DISTINCT district_code FROM sys_config_main) ;  ";
 
         $this->exec_sql("DROP PROCEDURE IF EXISTS gis_disease_$disease;");
 
