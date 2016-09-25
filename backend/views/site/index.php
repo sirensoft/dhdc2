@@ -4,7 +4,9 @@
 
 //$js_url = Yii::getAlias('@web');
 //$this->registerJsFile($js_url."/js/bootbox.min.js");
-
+use backend\models\Sysconfigmain;
+$amp = Sysconfigmain::find()->one();
+$amp = $amp->district_code;
 
 $this->registerCss(".btn-xlarge {
         padding: 18px 28px;
@@ -42,8 +44,9 @@ $this->title = 'DHDC Backend';
                 <div class="col-sm-3">
                     <?php
                     $path = Yii::getAlias('@databases');
+                    $link_download = "http://ftp2.plkhealth.go.th/databases/index.php?amp=$amp";
                     ?>
-                    <a class="btn btn-material-yellow" href="../../databases/" target="_blank">
+                    <a class="btn btn-material-yellow" href="<?=$link_download?>" target="_blank">
                         2) <i class="glyphicon glyphicon-arrow-up"></i> update db
                     </a>
                 </div>

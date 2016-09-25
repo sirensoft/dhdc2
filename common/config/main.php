@@ -29,5 +29,6 @@ return [
         'utehn' => [
             'class' => 'frontend\modules\utehn\Utehn',
         ],
+        
     ],
 ];
