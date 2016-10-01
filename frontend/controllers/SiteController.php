@@ -178,6 +178,12 @@ public $enableCsrfValidation = false;
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
             //return $this->goBack();
             //return $this->render('index');
+            $username = $model->username;
+            $ip = \Yii::$app->getRequest()->getUserIP();
+            
+            $sql = " INSERT INTO `user_log` (`username`, `login_date`, `ip`) VALUES ('$username',NOW(), '$ip') ";
+            \Yii::$app->db->createCommand($sql)->execute();
+            
             return $this->redirect(['site/index']);
         } else {
             return $this->render('login', [
