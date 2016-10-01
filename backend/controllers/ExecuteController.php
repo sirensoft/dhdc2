@@ -117,6 +117,7 @@ class ExecuteController extends AppController {
 
             //$this->call("run_sys_dhdc_count_file");
             $this->call("sys_dhdc_count_file",2559);
+            $this->call("sys_dhdc_count_file",2560);
                                
 
 
