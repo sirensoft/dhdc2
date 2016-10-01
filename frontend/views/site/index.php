@@ -47,6 +47,10 @@ $this->registerJsFile($dir_web . '/js/chart-donut.js', ['depends' => [\yii\web\J
         <a class="btn btn-small btn-danger" href="<?= yii\helpers\Url::to(['site/hos-index']) ?>">
             มุมมองตาราง
         </a>
+        <?php
+        /*if(!\Yii::$app->user->isGuest)
+        echo \Yii::$app->user->identity->office;*/
+        ?>
     </div>
 </div>
 

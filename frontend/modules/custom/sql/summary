@@ -1,0 +1,9 @@
+SELECT h.hoscode,h.hosname,b.target,b.result
+,ROUND(b.result*100/b.target,2) as 'percent' 
+FROM chospital_amp h
+LEFT JOIN
+(SELECT t.HOSPCODE
+,COUNT(t.HOSPCODE) AS 'target'
+,COUNT(if(t.DATE_SCREEN IS NOT NULL,t.HOSPCODE,NULL)) AS 'result'
+FROM custom_temp_screen_59 t
+GROUP BY t.HOSPCODE ) b ON b.HOSPCODE=h.hoscode

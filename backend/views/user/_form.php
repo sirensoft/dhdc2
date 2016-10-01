@@ -29,6 +29,14 @@ use backend\models\UserRole;
     ?>
 
 <?= $form->field($model, 'status')->textInput() ?>
+    
+<?php
+$sql = "SELECT t.hoscode,concat(t.hoscode,'-',t.hosname) hosname from chospital_amp t";
+$raw = \Yii::$app->db->createCommand($sql)->queryAll();
+$items = ArrayHelper::map($raw, 'hoscode','hosname');
+echo $form->field($model, 'office')->dropDownList($items,['prompt'=>'-- หน่วยงาน --']);
+
+?>
 
 
 

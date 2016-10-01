@@ -29,6 +29,8 @@ return [
         'utehn' => [
             'class' => 'frontend\modules\utehn\Utehn',
         ],
-        
+        'homegis' => [
+            'class' => 'frontend\modules\homegis\Homegis',
+        ],
     ],
 ];

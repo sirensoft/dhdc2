@@ -35,8 +35,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'filter' => \yii\helpers\ArrayHelper::map(backend\models\UserRole::find()->all(), 'role_name', 'role_desc'),
         ],
         // 'status',
-        'created_at',
-        'updated_at',
+        //'created_at',
+        //'updated_at',
+        'office',
         ['class' => 'yii\grid\ActionColumn']
     ];
     echo kartik\grid\GridView::widget([
