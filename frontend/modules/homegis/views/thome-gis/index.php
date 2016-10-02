@@ -8,12 +8,12 @@ use kartik\grid\ActionColumn;
 /* @var $searchModel frontend\modules\homegis\models\ThomeGisSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Thome Gis';
+$this->title = "หลังคาเรือนในพื้นที่ $vcode";
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="thome-gis-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
 
@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'HOUSE',
             'LATITUDE',
             'LONGITUDE',
-            ['class' => ActionColumn::className(),'template'=>'{view}' ],
+            ['class' => ActionColumn::className(),'template'=>'{update}' ],
             //['class' => 'yii\grid\ActionColumn'],
         ],
     ]); ?>

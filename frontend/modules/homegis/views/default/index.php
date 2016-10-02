@@ -19,13 +19,15 @@ use yii\helpers\Html;
                 'attribute'=>'MOO',
                 'format'=>'raw',
                 'label'=>'หมู่ที่',
-                'value'=>  function ($data){
-                    return Html::a($data['MOO'], ['/homegis/thome-gis/index','vcode'=>$data['VCODE']]); 
-                }
+                
             ],
             [
                 'attribute'=>'HOME',
-                'label'=>'จำนวน(หลัง)'
+                'format'=>'raw',
+                'label'=>'จำนวน(หลัง)',
+                'value'=>  function ($data){
+                    return Html::a($data['HOME'], ['/homegis/thome-gis/index','vcode'=>$data['VCODE']]); 
+                }
             ],
             
         ]

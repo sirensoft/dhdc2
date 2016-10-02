@@ -6,8 +6,8 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model frontend\modules\homegis\models\ThomeGis */
 
-$this->title = $model->HOSPCODE;
-$this->params['breadcrumbs'][] = ['label' => 'Thome Gis', 'url' => ['index']];
+$this->title = $model->HOSPCODE."-".$model->HID;
+$this->params['breadcrumbs'][] = ['label' => 'หลังคาเรือนในเขตรับผิดชอบ', 'url' => ['/homegis/default/index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="thome-gis-view">
@@ -22,7 +22,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'HOSPCODE',
+            //'HOSPCODE',
             'VCODE',
             'HID',
             'HOUSE',

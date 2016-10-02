@@ -12,8 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'HOSPCODE')->textInput(['maxlength' => true]) ?>
-    <?= $form->field($model, 'VCODE')->textInput(['maxlength' => true]) ?>
+    <?php //echo $form->field($model, 'HOSPCODE')->textInput(['maxlength' => true]) ?>
+    <?php //echo $form->field($model, 'VCODE')->textInput(['maxlength' => true,'readonly'=>true]) ?>
 
     <?= $form->field($model, 'HID')->textInput(['maxlength' => true]) ?>
 
@@ -24,7 +24,8 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'LONGITUDE')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-danger']) ?>
+        
     </div>
 
     <?php ActiveForm::end(); ?>
