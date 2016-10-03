@@ -29,9 +29,6 @@ class DefaultController extends AppController {
             fwrite($file, $data);
             $i++;
         }
-
-
-
         fclose($file);
 
         \Yii::$app->response->sendFile($filename);
