@@ -21,13 +21,16 @@ class DefaultController extends AppController {
         $filename = "house_gis.txt";
         $file = fopen($filename, "w");
         fwrite($file, $cols);
-        $data = [];
-        foreach ($raw as $value) {
-          
+        $num = count($raw);
+        $i = 0;
+        while ($i < $num) {
+            fwrite($file, "\r\n");
+            $data = implode("|", $raw[$i]);
+            fwrite($file, $data);
+            $i++;
         }
 
 
-        fwrite($file, $d);
 
         fclose($file);
 
