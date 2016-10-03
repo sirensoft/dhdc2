@@ -24,8 +24,9 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'LONGITUDE')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-danger']) ?>
-        
+        <?= Html::submitButton($model->isNewRecord ? 'Create' : 'บันทึก', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-success']) ?>
+        <?=  Html::a('ยกเลิก', ['/homegis/default/index'],['class'=>'btn btn-info'])?>
+        <a href="#" class="btn btn-warning" id="btnLocate">พิกัดอัตโนมัติ</a>
     </div>
 
     <?php ActiveForm::end(); ?>

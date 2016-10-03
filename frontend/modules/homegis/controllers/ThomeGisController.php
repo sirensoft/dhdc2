@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * ThomeGisController implements the CRUD actions for ThomeGis model.
  */
-class ThomeGisController extends Controller
+class ThomeGisController extends \common\components\AppController
 {
     public function behaviors()
     {
@@ -83,6 +83,7 @@ class ThomeGisController extends Controller
      */
     public function actionUpdate($HOSPCODE, $HID,$vcode=NULL)
     {
+        $this->permitRole([1,2]);
         $model = $this->findModel($HOSPCODE, $HID);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
