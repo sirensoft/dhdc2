@@ -25,7 +25,7 @@ $this->params['breadcrumbs'][] = ['label' => 'หลังคาเรือน�
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <div class="alert alert-danger">
-        <h4>พื้นที่ <?=$area?></h4>
+        <b>พื้นที่ <?=$area?></b>
     </div>
     <div class="pull-right">
         <b><?=  Html::a('ส่งออก', ['/homegis/default/csv','vcode'=>$vcode],['target'=>'blank'])?></b>
