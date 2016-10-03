@@ -27,7 +27,7 @@ $this->params['breadcrumbs'][] = ['label' => 'หลังคาเรือน�
     <div class="alert alert-danger">
         <h4>พื้นที่ <?=$area?></h4>
     </div>
-    <div><?=  Html::a('ส่งออก', ['homegis/defult/export'],['target'=>'blank'])?></div>
+    <div><?=  Html::a('ส่งออก', ['/homegis/default/csv','vcode'=>$vcode],['target'=>'blank'])?></div>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
