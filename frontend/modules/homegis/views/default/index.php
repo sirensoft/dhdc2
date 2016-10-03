@@ -8,7 +8,7 @@ $hos = ChospitalAmp::findOne(['hoscode'=>$hospcode]);
 $hosname = $hos->hosname;
 ?>
 <div class="homegis-default-index">
-    <h3>จำนวนหลังคาเรือนในเขตรับผิดชอบของ <?=$hospcode?>-<?=$hosname?></h3>
+    <h3>หลังคาเรือนในเขตรับผิดชอบของ <?=$hospcode?>-<?=$hosname?></h3>
     <?php
     
     echo GridView::widget([
