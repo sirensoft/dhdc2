@@ -81,7 +81,7 @@ class ThomeGisController extends Controller
      * @param string $HID
      * @return mixed
      */
-    public function actionUpdate($HOSPCODE, $HID)
+    public function actionUpdate($HOSPCODE, $HID,$vcode=NULL)
     {
         $model = $this->findModel($HOSPCODE, $HID);
 
@@ -90,6 +90,7 @@ class ThomeGisController extends Controller
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'vcode'=>$vcode
             ]);
         }
     }

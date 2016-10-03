@@ -1,10 +1,14 @@
 <?php
 use kartik\grid\GridView;
 use yii\helpers\Html;
+use frontend\models\ChospitalAmp;
 
+$hos = ChospitalAmp::findOne(['hoscode'=>$hospcode]);
+
+$hosname = $hos->hosname;
 ?>
 <div class="homegis-default-index">
-    <h3>จำนวนหลังคาเรือนในเขตรับผิดชอบของ <?=$hospcode?></h3>
+    <h3>จำนวนหลังคาเรือนในเขตรับผิดชอบของ <?=$hospcode?>-<?=$hosname?></h3>
     <?php
     
     echo GridView::widget([

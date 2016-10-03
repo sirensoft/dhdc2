@@ -15,9 +15,9 @@ use yii\widgets\ActiveForm;
     <?php //echo $form->field($model, 'HOSPCODE')->textInput(['maxlength' => true]) ?>
     <?php //echo $form->field($model, 'VCODE')->textInput(['maxlength' => true,'readonly'=>true]) ?>
 
-    <?= $form->field($model, 'HID')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'HID')->textInput(['maxlength' => true,'readonly'=>TRUE]) ?>
 
-    <?= $form->field($model, 'HOUSE')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'HOUSE')->textInput(['maxlength' => true,'readonly'=>TRUE]) ?>
 
     <?= $form->field($model, 'LATITUDE')->textInput(['maxlength' => true]) ?>
 
