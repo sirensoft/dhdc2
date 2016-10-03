@@ -24,11 +24,14 @@ $this->params['breadcrumbs'][] = ['label' => 'หลังคาเรือน�
     
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-
+    <div class="alert alert-danger">
+        <h4>พื้นที่ <?=$area?></h4>
+    </div>
+    <div><?=  Html::a('ส่งออก', ['homegis/defult/export'],['target'=>'blank'])?></div>
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
-        'panel'=>['before'=>"<h4>พื้นที่ $area</h4>"],
+        //'panel'=>['before'=>""],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
