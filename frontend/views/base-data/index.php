@@ -34,15 +34,10 @@ $this->params['breadcrumbs'][] = 'ข้อมูลพื้นฐาน';
 </p>
 
 
-<p>
-    <?php
-    echo \yii\helpers\Html::a('4) รายการ PERSON ที่มี TYPEAREA 1,3 ซ้ำซ้อน', ['/err-person-typearea-cup/index']);    
-    ?>
-</p>
 
 <p>
     <?php
-    echo Html::a('5) ตรวจสอบผลการบันทึก',['/portal-qc/index']);
+    echo Html::a('4) ตรวจสอบผลการบันทึก',['/portal-qc/index']);
     ?>
 </p>
 

@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="thome-gis-update">
 
-    <h4><?= Html::encode($this->title) ?></h4>
+  
 
     <?=
     $this->render('_form', [
@@ -42,9 +42,12 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <?php
 $js = <<<JS
-             
+   
+     var lat = $('#thomegis-latitude').val(); 
+     var lng = $('#thomegis-longitude').val();   
+   
     L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
-    var map = L.mapbox.map('map', 'mapbox.streets').setView([16, 100], 6);
+    var map = L.mapbox.map('map', 'mapbox.streets').setView([lat, lng], 8);
     L.control.locate().addTo(map);
     //var map = L.mapbox.map('map');
     var baseLayers = {
@@ -53,6 +56,24 @@ $js = <<<JS
         
     };
      L.control.layers(baseLayers).addTo(map);
+     
+      
+     
+     var pos = [lat,lng];
+        
+     var marker = L.marker(pos, {
+            draggable: true
+     });
+     marker.bindPopup("อยู่ที่นี่..")
+     marker.addTo(map);
+        
+     marker.on("dragend", function(e) {
+        var m = e.target;
+        var position = m.getLatLng();
+        map.panTo(new L.LatLng(position.lat, position.lng));
+        $('#thomegis-latitude').val(position.lat); 
+        $('#thomegis-longitude').val(position.lng); 
+    });
         
     function getLocation() {
         if (navigator.geolocation) {
@@ -62,17 +83,16 @@ $js = <<<JS
         }
     }
     function showPosition(position) {
-        var lat = position.coords.latitude; 
-        var lon = position.coords.longitude; 
-        $('#thomegis-latitude').val(lat);
-        $('#thomegis-longitude').val(lon);
-        var pos = [lat,lon];
-        var marker = L.marker(pos, {
-            draggable: true
-        });
-        map.removeLayer(marker);
-        marker.addTo(map);
-        map.setView([lat, lon], 14);
+        lat = position.coords.latitude;
+        lng = position.coords.longitude
+        map.setView([lat, lng], 16);
+        //map.panTo(new L.LatLng(lat,lng));
+        $('#thomegis-latitude').val(lat); 
+        $('#thomegis-longitude').val(lng); 
+        
+        var newLatLng = new L.LatLng(lat, lng);
+        marker.setLatLng(newLatLng); 
+        marker.openPopup();
     }
     $('#btnLocate').on('click',function(){
         getLocation();
