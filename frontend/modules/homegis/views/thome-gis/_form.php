@@ -15,20 +15,13 @@ use yii\widgets\ActiveForm;
     <?php //echo $form->field($model, 'HOSPCODE')->textInput(['maxlength' => true]) ?>
     <?php //echo $form->field($model, 'VCODE')->textInput(['maxlength' => true,'readonly'=>true]) ?>
     <div class="row">
-        <div class="col-md-6"><?= $form->field($model, 'HID')->textInput(['maxlength' => true,'readonly'=>TRUE]) ?></div>
-        <div class="col-md-6"><?= $form->field($model, 'HOUSE')->textInput(['maxlength' => true,'readonly'=>TRUE]) ?></div>
-    </div>
-    <div class="row">
-        <div class="col-md-6"><?= $form->field($model, 'LATITUDE')->textInput(['maxlength' => true]) ?></div>
-        <div class="col-md-6"> <?= $form->field($model, 'LONGITUDE')->textInput(['maxlength' => true]) ?></div>
-    </div>
-    
-
-    
-
-    
-
+        <div class="col-md-3"><?= $form->field($model, 'HID')->textInput(['maxlength' => true,'readonly'=>TRUE]) ?></div>
+        <div class="col-md-3"><?= $form->field($model, 'HOUSE')->textInput(['maxlength' => true,'readonly'=>TRUE]) ?></div>
    
+        <div class="col-md-3"><?= $form->field($model, 'LATITUDE')->textInput(['maxlength' => true]) ?></div>
+        <div class="col-md-3"> <?= $form->field($model, 'LONGITUDE')->textInput(['maxlength' => true]) ?></div>
+    </div>
+    
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'บันทึก', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-success']) ?>

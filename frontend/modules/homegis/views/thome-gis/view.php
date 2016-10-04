@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Update', ['update', 'HOSPCODE' => $model->HOSPCODE, 'HID' => $model->HID], ['class' => 'btn btn-danger']) ?>
-        <button class="btn btn-success">แผนที่</button>
+        
     </p>
 
     <?= DetailView::widget([

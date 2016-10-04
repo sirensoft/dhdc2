@@ -47,12 +47,12 @@ $js = <<<JS
      var lng = $('#thomegis-longitude').val();   
    
     L.mapbox.accessToken = 'pk.eyJ1IjoidGVobm5uIiwiYSI6ImNpZzF4bHV4NDE0dTZ1M200YWxweHR0ZzcifQ.lpRRelYpT0ucv1NN08KUWQ';
-    var map = L.mapbox.map('map', 'mapbox.streets').setView([lat, lng], 8);
+    var map = L.mapbox.map('map', 'mapbox.streets').setView([lat, lng], 16);
     L.control.locate().addTo(map);
     //var map = L.mapbox.map('map');
     var baseLayers = {
-	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map),        
-        "แผนที่ดาวเทียม": L.mapbox.tileLayer('mapbox.satellite'),
+	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets'),        
+        "แผนที่ดาวเทียม": L.mapbox.tileLayer('mapbox.satellite').addTo(map),
         
     };
      L.control.layers(baseLayers).addTo(map);
@@ -71,6 +71,12 @@ $js = <<<JS
         var m = e.target;
         var position = m.getLatLng();
         map.panTo(new L.LatLng(position.lat, position.lng));
+        $('#thomegis-latitude').val(position.lat); 
+        $('#thomegis-longitude').val(position.lng); 
+    });
+    marker.on("drag", function(e) {
+        var m = e.target;
+        var position = m.getLatLng();        
         $('#thomegis-latitude').val(position.lat); 
         $('#thomegis-longitude').val(position.lng); 
     });

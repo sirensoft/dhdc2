@@ -87,6 +87,13 @@ class ThomeGisController extends \common\components\AppController
         $model = $this->findModel($HOSPCODE, $HID);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            
+            $lat = $model->LATITUDE;
+            $lng = $model->LONGITUDE;
+            $sql = " UPDATE home h set h.LATITUDE = '$lat',h.LONGITUDE = '$lng'
+                     WHERE h.HOSPCODE ='$HOSPCODE'  AND h.HID = '$HID' ";
+            \Yii::$app->db->createCommand($sql)->execute();
+            
             return $this->redirect(['view', 'HOSPCODE' => $model->HOSPCODE, 'HID' => $model->HID]);
         } else {
             return $this->render('update', [
