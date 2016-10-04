@@ -13,6 +13,7 @@ $hosname = $hos->hosname;
     
     echo GridView::widget([
         'dataProvider'=>$dataProvider,
+        'responsiveWrap' => false,
         'panel'=>['before'=>'หลังคาเรือน'],
         'columns'=>[
             [

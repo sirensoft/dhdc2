@@ -47,6 +47,12 @@ $js = <<<JS
     var map = L.mapbox.map('map', 'mapbox.streets').setView([16, 100], 6);
     L.control.locate().addTo(map);
     //var map = L.mapbox.map('map');
+    var baseLayers = {
+	"แผนที่ถนน": L.mapbox.tileLayer('mapbox.streets').addTo(map),        
+        "แผนที่ดาวเทียม": L.mapbox.tileLayer('mapbox.satellite'),
+        
+    };
+     L.control.layers(baseLayers).addTo(map);
         
     function getLocation() {
         if (navigator.geolocation) {
@@ -58,7 +64,15 @@ $js = <<<JS
     function showPosition(position) {
         var lat = position.coords.latitude; 
         var lon = position.coords.longitude; 
-        map.setView([lat, lon], 12);
+        $('#thomegis-latitude').val(lat);
+        $('#thomegis-longitude').val(lon);
+        var pos = [lat,lon];
+        var marker = L.marker(pos, {
+            draggable: true
+        });
+        map.removeLayer(marker);
+        marker.addTo(map);
+        map.setView([lat, lon], 14);
     }
     $('#btnLocate').on('click',function(){
         getLocation();

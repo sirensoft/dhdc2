@@ -33,6 +33,7 @@ $this->params['breadcrumbs'][] = ['label' => 'หลังคาเรือน�
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
+        'responsiveWrap' => false,
         //'panel'=>['before'=>""],
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
