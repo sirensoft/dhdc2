@@ -46,11 +46,6 @@ $this->params['breadcrumbs'][] = 'ข้อมูลพื้นฐาน';
     ?>
 </p>
 
-<p>
-    <?php
-    echo Html::a('6) หลังคาเรือนในเขตรับผิดชอบ',['/homegis/default/index']);
-    ?>
-</p>
 
 
 
