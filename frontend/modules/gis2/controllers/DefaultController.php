@@ -202,4 +202,9 @@ class DefaultController extends AppController {
                     'hos_json' => $hos_json
         ]);
     }
+    public function actionDisease($disease=NULL){
+        
+        
+    }
+    
 }
