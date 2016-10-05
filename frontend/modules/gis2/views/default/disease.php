@@ -25,7 +25,7 @@ use kartik\grid\GridView;
     
     ActiveForm::begin([
         'method' => 'get',
-        'action' => Url::to(['/gis/default/disease']),
+        'action' => Url::to(['/gis2/default/disease']),
     ]);
     ?>
     <?php
