@@ -76,15 +76,21 @@ $this->title = 'DHDC Backend';
                     <i class="glyphicon glyphicon-refresh"></i> ตรวจคุณภาพ
                 </a>
             </div>
-
-            <div class="col-sm-4">
-
-                <button class="btn btn-danger btn-xlarge" id="btn_process_report"> 
-                    <i class="glyphicon glyphicon-refresh"></i> ประมวลผลข้อมูล
-                </button>
-
+            
+             <div class="col-sm-4">
+                <?php
+                //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
+                $route = yii\helpers\Url::to(['hdcsql/gate']);
+                ?>
+                <a class="btn btn-success btn-xlarge" href="<?= $route ?>"> 
+                    <i class="glyphicon glyphicon-ok"></i> เทียบเคียง HDC  
+                </a>
 
             </div>
+
+            
+            
+            
         </div>
         <br>
         <div class="row">
@@ -113,7 +119,7 @@ $this->title = 'DHDC Backend';
                 <?php
                 $route = \Yii::$app->urlManager->createUrl('syssettime/index');
                 ?>
-                <a class="btn btn-success btn-xlarge" id="btn_set_process" href="<?=$route?>"> 
+                <a class="btn btn-material-lime-A100 btn-xlarge" id="btn_set_process" href="<?=$route?>"> 
                     <i class="glyphicon glyphicon-time"></i> ตั้งเวลาประมวลผล
                 </a>
             </div>
@@ -181,16 +187,7 @@ $this->title = 'DHDC Backend';
                 </a>
 
             </div>
-            <div class="col-sm-4">
-                <?php
-                //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
-                $route = yii\helpers\Url::to(['hdcsql/gate']);
-                ?>
-                <a class="btn btn-success btn-xlarge" href="<?= $route ?>"> 
-                    <i class="glyphicon glyphicon-ok"></i> เทียบเคียง HDC  
-                </a>
-
-            </div>
+           
 
             <div class="col-sm-4">
                 <?php
@@ -216,7 +213,7 @@ $this->title = 'DHDC Backend';
 
 <?php
 $route_chk_update = Yii::$app->urlManager->createUrl('update/checkver');
-$route_process_report = Yii::$app->urlManager->createUrl('execute/processreport');
+
 $route_qc = Yii::$app->urlManager->createUrl('qc/exec');
 $route_indiv_exec = yii\helpers\Url::to(['indiv/exec', 'selyear' => '2016']);
 $route_process_json = \yii\helpers\Url::to(['execute/process-json']);
@@ -251,16 +248,7 @@ $script1 = <<< JS
     
  });
         
- $('#btn_process_report').on('click', function () {
-          $('#res').toggle();   
-    $.ajax({
-       url: "$route_process_report",       
-       success: function(data) {
-           $('#res').toggle();               
-            //alert(data+' สำเร็จ'); 
-       }
-    });
- });
+
         
   $('#btn_qc').on('click', function () {
     $('#res').toggle();   

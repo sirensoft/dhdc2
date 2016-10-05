@@ -41,7 +41,45 @@ class QcController extends AppController {
         $this->permitRole([1]);
         $running = \backend\models\SysProcessRunning::find()->one();
         if ($running->is_running == 'false') {    
-            $this->call("err_all", NULL);
+            $this->call("err_all", NULL);          
+            
+             //ใส่  store;
+            $this->call("start_process", NULL);
+
+            $this->call("merge_newborncare", NULL);
+                 
+
+            $bdg = '2016-09-30';
+            $model = \backend\models\Sysconfigmain::find()->one();
+            if ($model) {
+                $bdg = $model->note2;
+            }
+            $bdg = "'" . $bdg . "'";
+
+            $this->call("merge_newborncare", NULL);
+            $this->call("clear_upload_error", NULL);
+            $this->call("clear_null_hospcode", NULL);           
+
+            $this->call("cal_pyramid_level_1", $bdg);
+            $this->call("cal_pyramid_level_2");
+            $this->call("cal_pyramid_level_3");
+
+            $this->call("cal_sys_person_type");
+
+            //$this->call("run_sys_dhdc_count_file");
+            $this->call("sys_dhdc_count_file",2559);
+            $this->call("sys_dhdc_count_file",2560);
+                               
+
+
+            $this->call("end_process", NULL);
+            
+             $this->call('z_all', NULL);
+            //
+            //จบใส่ store
+            
+            
+            
             return 'success';
         } else {
             return 'running';

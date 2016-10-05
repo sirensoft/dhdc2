@@ -61,7 +61,7 @@ class SyssettimeController extends AppController {
         $this->exec_sql("DROP EVENT IF EXISTS event4;");
 
 
-        $bdg = '2015-09-30';
+        $bdg = '2016-09-30';
         $model = \backend\models\Sysconfigmain::find()->one();
         if ($model) {
             $bdg = $model->note2;
