@@ -23,6 +23,9 @@ return [
         'gis' => [
             'class' => 'frontend\modules\gis\Gis',
         ],
+        'gis2' => [
+            'class' => 'frontend\modules\gis2\Gis2',
+        ],
         'hdcex' => [
             'class' => 'frontend\modules\hdcex\Hdcex',
         ],
