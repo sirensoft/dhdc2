@@ -3,6 +3,7 @@
 namespace frontend\modules\hdc\controllers;
 
 use common\components\AppController;
+use backend\models\Hdcsql;
 
 class DefaultController extends AppController {
 
@@ -51,6 +52,10 @@ set t.rpt = s.report_name WHERE t.id = s.id ";
     public function actionReportId($id = NULL, $rpt = NULL) {
         $this->permitRole([1,2]);
         $this->layout = 'hdc';
+        
+       $sql = " update hdc_rpt_sql t set t.rpt_name = '$rpt' where t.rpt_id='$id' ";
+       \Yii::$app->db->createCommand($sql)->execute();
+        
         return $this->render('report-id', [
                     'id' => $id,
                     'rpt' => $rpt

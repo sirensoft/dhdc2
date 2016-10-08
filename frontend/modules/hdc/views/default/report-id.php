@@ -16,6 +16,7 @@ $this->title = $rpt;
 $sql = " SELECT * FROM hdc_sys_report t WHERE t.id = '$id' limit 1 ";
 $raw = Yii::$app->db->createCommand($sql)->queryOne();
 $tb = $raw['source_table'];
+$report_name = $raw['report_name'];
 $proc = $raw['t_sql'];
 $sp = $tb . '_' . $id;
 $sql_sp = "call $sp;";
@@ -30,6 +31,7 @@ try {
 
 
     <?php
+    
     $sql = " select * from  hdc_rpt_sql t where t.rpt_id = '$id' limit 1";
     $raw = \Yii::$app->db->createCommand($sql)->queryOne();
     $sql_sum = $raw['sql_sum'];
