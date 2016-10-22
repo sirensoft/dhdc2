@@ -40,6 +40,9 @@ $sql = "select t.title,ex_sql from sys_data_exchange t where t.ex_id = '$ex_id'"
 $raw = $db->createCommand($sql)->queryOne();
 //$what = $raw['note1'];
 $what = "t1.hospcode";
+if($ex_id=='12489be4fcf94dc14de42607aa2f7aa0'){
+   $what = "d.hospcode"; 
+}
 
 if($hospcode<>'all'){
     $ex_sql = str_replace('{exp_office}', "  and $what = '$hospcode'  ", $raw['ex_sql']);

@@ -29,7 +29,7 @@ class CountFileController extends \yii\web\Controller {
         return $rawData;
     }
 
-    public function actionIndex($tb='service',$b_year='2559') {
+    public function actionIndex($tb='service',$b_year='2560') {
         //$post = Yii::$app->request->post();
         //$year = date('m') >= 10 ? date('Y') + 544 : date('Y') + 543;
 

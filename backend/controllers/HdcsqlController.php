@@ -66,7 +66,7 @@ class HdcsqlController extends AppController {
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8; ";
         $this->exec_sql($sql);
-        sleep(3);
+        sleep(5);
 
         $sql = "TRUNCATE sys_transform_all;";
         $this->exec_sql($sql);
