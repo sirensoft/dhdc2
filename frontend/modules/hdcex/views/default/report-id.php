@@ -13,7 +13,8 @@ $db = \Yii::$app->db;
 
 <div class='well'>
     <?php
-   
+    $skip_id = ['c10a2aa18f688027da4746eff598172b', 'eaf586ae6959ac7ef7d30513aa05a4d2'];
+
     $form = ActiveForm::begin([
                 'method' => 'get',
                 'action' => Url::to(['/hdcex/default/report-id']),
@@ -23,12 +24,14 @@ $db = \Yii::$app->db;
     $itms_opt = ArrayHelper::map(ChospitalAmp::find()->all(), 'hoscode', 'fullname');
     $hospcode = \Yii::$app->request->get('hospcode');
     echo Html::dropDownList('hospcode', $hospcode, $itms_opt, ['prompt' => '- หน่วยบริการ -']);
-    echo Html::submitButton(' ตกลง ', ['class' => 'btn btn-danger','style'=>'margin-left:5px']);
-    echo Html::a('ทั้งหมด', ['/hdcex/default/report-all','ex_id'=>$ex_id,'title'=>$title,'hospcode'=>'all'],['class'=>'btn btn-warning','style'=>'margin-left:5px']);
+    echo Html::submitButton(' ตกลง ', ['class' => 'btn btn-danger', 'style' => 'margin-left:5px']);
+    if (!in_array($ex_id, $skip_id)) {
+        echo Html::a('ทั้งหมด', ['/hdcex/default/report-all', 'ex_id' => $ex_id, 'title' => $title, 'hospcode' => 'all'], ['class' => 'btn btn-warning', 'style' => 'margin-left:5px']);
+    }
+
     ActiveForm::end();
-    
     ?>
-    
+
 </div>
 
 <?php
@@ -40,14 +43,14 @@ $sql = "select t.title,ex_sql from sys_data_exchange t where t.ex_id = '$ex_id'"
 $raw = $db->createCommand($sql)->queryOne();
 //$what = $raw['note1'];
 $what = "t1.hospcode";
-if($ex_id=='12489be4fcf94dc14de42607aa2f7aa0'){
-   //$what = "d.hospcode"; 
+if ($ex_id == '12489be4fcf94dc14de42607aa2f7aa0') {
+    //$what = "d.hospcode"; 
 }
 
-if($hospcode<>'all'){
+if ($hospcode <> 'all') {
     $ex_sql = str_replace('{exp_office}', "  and $what = '$hospcode'  ", $raw['ex_sql']);
-}  else {
-    $ex_sql = str_replace('{exp_office}', "  ", $raw['ex_sql']);   
+} else {
+    $ex_sql = str_replace('{exp_office}', "  ", $raw['ex_sql']);
 }
 $ex_sql = str_replace('tmp_export_exchange', "tmp_export_exchange_$ex_id", $ex_sql);
 $ex_sql = str_replace('chospital', "chospital_amp", $ex_sql);
