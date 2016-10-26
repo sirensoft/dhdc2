@@ -41,7 +41,7 @@ $raw = $db->createCommand($sql)->queryOne();
 //$what = $raw['note1'];
 $what = "t1.hospcode";
 if($ex_id=='12489be4fcf94dc14de42607aa2f7aa0'){
-   $what = "d.hospcode"; 
+   //$what = "d.hospcode"; 
 }
 
 if($hospcode<>'all'){
