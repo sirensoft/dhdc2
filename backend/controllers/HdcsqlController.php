@@ -367,5 +367,9 @@ ORDER BY t.id ASC ";
 
         return $this->render('setyear');
     }
+    
+    public function actionSettime(){
+        return $this->render('settime');
+    }
 
 }
