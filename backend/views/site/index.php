@@ -82,7 +82,7 @@ $this->title = 'DHDC Backend';
                 <?php
                 $route = \Yii::$app->urlManager->createUrl('syssettime/index');
                 ?>
-                <a class="btn btn-material-lime-A100 btn-xlarge" id="btn_set_process" href="<?=$route?>"> 
+                <a class="btn btn-material-orange-300 btn-xlarge" id="btn_set_process" href="<?=$route?>"> 
                     <i class="glyphicon glyphicon-time"></i> ตั้งเวลาตรวจ
                 </a>
             </div>
@@ -120,7 +120,7 @@ $this->title = 'DHDC Backend';
                 //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
                 $route = yii\helpers\Url::to(['hdcsql/gate']);
                 ?>
-                <a class="btn btn-success btn-xlarge" href="<?= $route ?>"> 
+                <a class="btn btn-material-yellow-300 btn-xlarge" href="<?= $route ?>"> 
                     <i class="glyphicon glyphicon-ok"></i> เทียบเคียง HDC  
                 </a>
 
