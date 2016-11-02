@@ -11,10 +11,10 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sys-set-time-index">
 
-   
+    <h3>ตั้งเวลาตรวจคุณภาพข้อมูล</h3>
 
     <p>
-        <?= Html::a('ตั้งเวลาประมวลผล', ['create'], ['class' => 'btn btn-success']) ?>
+        <?= Html::a('สร้างเวลา', ['create'], ['class' => 'btn btn-success']) ?>
     </p>
 
     <?= GridView::widget([

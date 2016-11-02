@@ -77,15 +77,14 @@ $this->title = 'DHDC Backend';
                 </a>
             </div>
             
+             
              <div class="col-sm-4">
                 <?php
-                //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
-                $route = yii\helpers\Url::to(['hdcsql/gate']);
+                $route = \Yii::$app->urlManager->createUrl('syssettime/index');
                 ?>
-                <a class="btn btn-success btn-xlarge" href="<?= $route ?>"> 
-                    <i class="glyphicon glyphicon-ok"></i> เทียบเคียง HDC  
+                <a class="btn btn-material-lime-A100 btn-xlarge" id="btn_set_process" href="<?=$route?>"> 
+                    <i class="glyphicon glyphicon-time"></i> ตั้งเวลาตรวจ
                 </a>
-
             </div>
 
             
@@ -115,14 +114,20 @@ $this->title = 'DHDC Backend';
                     <i class="glyphicon glyphicon-refresh"></i> ดู Process
                 </a>
             </div>
+            
             <div class="col-sm-4">
                 <?php
-                $route = \Yii::$app->urlManager->createUrl('syssettime/index');
+                //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
+                $route = yii\helpers\Url::to(['hdcsql/gate']);
                 ?>
-                <a class="btn btn-material-lime-A100 btn-xlarge" id="btn_set_process" href="<?=$route?>"> 
-                    <i class="glyphicon glyphicon-time"></i> ตั้งเวลาประมวลผล
+                <a class="btn btn-success btn-xlarge" href="<?= $route ?>"> 
+                    <i class="glyphicon glyphicon-ok"></i> เทียบเคียง HDC  
                 </a>
+
             </div>
+           
+            
+            
         </div>
         <br>
         <div class="row">
