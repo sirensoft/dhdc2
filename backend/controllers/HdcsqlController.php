@@ -30,11 +30,10 @@ class HdcsqlController extends AppController {
     }
 
     public function actionSetup() {
-         $this->exec_sql("CALL zz_sys_process_running_false;");
+        $this->exec_sql("CALL zz_sys_process_running_false;");
         $this->hdc_init();
         echo 'success..ok';
     }
-    
 
     public function actionExec() {
 
@@ -54,8 +53,8 @@ class HdcsqlController extends AppController {
     }
 
     protected function hdc_init() {
-              
-        
+
+
         $sql = " CREATE TABLE IF NOT EXISTS `sys_transform_all` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `t_name` varchar(100) DEFAULT NULL,
@@ -352,6 +351,21 @@ ORDER BY t.id ASC ";
         $path = Yii::getAlias('@web');
         $myfile = $filename;
         \Yii::$app->response->sendFile($myfile);
+    }
+
+    public function actionSetyear() {
+        $request = Yii::$app->request;
+
+        if ($request->isPost) {
+            $year = $request->post('year');
+            if (!empty($year)) {
+                $sql = " update sys_config set yearprocess ='$year' ";
+                \Yii::$app->db->createCommand($sql)->execute();
+                \Yii::$app->session->setFlash('success', "ตั้งค่าสำเร็จ");
+            }
+        }
+
+        return $this->render('setyear');
     }
 
 }

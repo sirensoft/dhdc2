@@ -3,13 +3,20 @@ $this->title = 'ระบบจัดการข้อมูลเทียบ�
 
 use yii\helpers\Html;
 use yii\helpers\Url;
+
+$sql =" select yearprocess from sys_config limit 1";
+$res = \Yii::$app->db->createCommand($sql)->queryOne();
+
 ?>
-<h3>ระบบประมวลผลรายงานเทียบเคียง HDC</h3>
+<h3>ระบบประมวลผลรายงานเทียบเคียง HDC ปีงบ<?=$res['yearprocess']*1+543?></h3>
 <div id="res" style="display: none" class="alert alert-danger">
     กำลังประมวลผล...
 </div>
 
-<?= Html::a('จัดการรายงาน', ['/hdcsql/index'], ['class' => 'btn btn-material-red-300 btn-lg', 'target' => '_blank']) ?>
+<?= Html::a("ตั้งค่าปีประมวลผล", ['/hdcsql/setyear'], ['class' => 'btn btn-material-red-300 btn-lg']) ?>
+
+
+<?= Html::a('จัดการรายงาน', ['/hdcsql/index'], ['class' => 'btn btn-material-green btn-lg', 'target' => '_blank']) ?>
 
 <a href="http://ftp2.plkhealth.go.th/rpt_update/" target="_blank" class="btn btn-material-lime btn-lg">
     <i class="glyphicon glyphicon-alert"></i>
