@@ -370,14 +370,19 @@ ORDER BY t.id ASC ";
 
     public function actionSettime() {
         $this->overclock();
+        
         $request = Yii::$app->request;
 
         if ($request->isPost) {
             $time = $request->post('time');
             if (!empty($time)) {
+                
+                
+                
                 $sql = " update sys_hdc_time set time ='$time' ";
-               
+
                 $this->exec_sql($sql);
+                $this->hdc_init();
 
                 $this->exec_sql("DROP EVENT IF EXISTS hdc_all_t;");
                 $date = date('Y-m-d');
@@ -387,9 +392,12 @@ ORDER BY t.id ASC ";
                         DO BEGIN\r\n";
                 $sql.= " CALL  hdc_all_t;\r\n";
                 $sql.="\r\nEND;";
-                 
+
                 $this->exec_sql($sql);
 
+
+                //$this->exec_sql("CALL zz_sys_process_running_false;");
+                
 
                 \Yii::$app->session->setFlash('success', "ตั้งค่าสำเร็จ");
             }

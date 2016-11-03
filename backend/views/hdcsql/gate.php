@@ -24,7 +24,7 @@ $res = \Yii::$app->db->createCommand($sql)->queryOne();
 </a>
 
 <a class="btn btn-material-blue-300 btn-lg" onclick="hdc_exec()">
-    ประมวลผลรายงาน
+    ประมวลผลข้อมูลเทียบเคียง HDC
 </a>
 
 <?= Html::a("  ตั้งเวลา  ", ['/hdcsql/settime'], ['class' => 'btn btn-material-orange-300 btn-lg']) ?>
