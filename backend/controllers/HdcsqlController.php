@@ -367,8 +367,34 @@ ORDER BY t.id ASC ";
 
         return $this->render('setyear');
     }
-    
-    public function actionSettime(){
+
+    public function actionSettime() {
+        $this->overclock();
+        $request = Yii::$app->request;
+
+        if ($request->isPost) {
+            $time = $request->post('time');
+            if (!empty($time)) {
+                $sql = " update sys_hdc_time set time ='$time' ";
+               
+                $this->exec_sql($sql);
+
+                $this->exec_sql("DROP EVENT IF EXISTS hdc_all_t;");
+                $date = date('Y-m-d');
+                $sql = "CREATE EVENT hdc_all_t
+                        ON SCHEDULE EVERY '1' DAY
+                        STARTS '$date $time'
+                        DO BEGIN\r\n";
+                $sql.= " CALL  hdc_all_t;\r\n";
+                $sql.="\r\nEND;";
+                 
+                $this->exec_sql($sql);
+
+
+                \Yii::$app->session->setFlash('success', "ตั้งค่าสำเร็จ");
+            }
+        }
+
         return $this->render('settime');
     }
 
