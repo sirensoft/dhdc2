@@ -371,7 +371,7 @@ ORDER BY t.id ASC ";
     public function actionSettime() {
         $this->overclock();
         
-        $request = Yii::$app->request;
+        $request = \Yii::$app->request;
 
         if ($request->isPost) {
             $time = $request->post('time');
