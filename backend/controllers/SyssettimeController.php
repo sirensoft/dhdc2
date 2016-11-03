@@ -59,6 +59,7 @@ class SyssettimeController extends AppController {
         $this->exec_sql("DROP EVENT IF EXISTS event2;");
         $this->exec_sql("DROP EVENT IF EXISTS event3;");
         $this->exec_sql("DROP EVENT IF EXISTS event4;");
+        $this->exec_sql("DROP EVENT IF EXISTS qc_files;");
 
 
         $bdg = '2016-09-30';
@@ -77,7 +78,7 @@ class SyssettimeController extends AppController {
             $time = $t->event_time;
             $days = $t->days;
 
-            $sql = "CREATE EVENT event1
+            $sql = "CREATE EVENT qc_files
             ON SCHEDULE EVERY '$days' DAY
             STARTS '$date $time'
             DO BEGIN\n\n";

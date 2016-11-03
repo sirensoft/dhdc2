@@ -123,6 +123,7 @@ class ExecuteController extends AppController {
 
             $this->call("end_process", NULL);
             
+            $this->call("err_all",NULL);
              $this->call('z_all', NULL);
             //
             //จบใส่ store
