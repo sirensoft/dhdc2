@@ -210,7 +210,7 @@ $this->title = 'DHDC Backend';
                 //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
                 $route = yii\helpers\Url::to(['cls/index', 'param' => 'value']);
                 ?>
-                <a class="btn btn-info btn-xlarge" href="<?= $route ?>"> 
+                <a class="btn btn-info btn-xlarge" href="#"> 
                     <i class="glyphicon glyphicon-remove-circle"></i> Clear แฟ้ม 
                 </a>
 
