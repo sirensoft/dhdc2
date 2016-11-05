@@ -87,13 +87,33 @@ use yii\helpers\ArrayHelper;
 
 <?php
 $js = <<<JS
-    $('.check-person').click(function() {
-    
-    var selector = $(this).is(':checked') ? ':not(:checked)' : ':checked';
-    $('#person input[type="checkbox"]' + selector).each(function() {
-        $(this).trigger('click');
+    $('.check-person').click(function() {    
+        var selector = $(this).is(':checked') ? ':not(:checked)' : ':checked';
+        $('#person input[type="checkbox"]' + selector).each(function() {
+            $(this).trigger('click');
+        });            
     });
-});
+    
+    $('.check-chronic').click(function() {    
+        var selector = $(this).is(':checked') ? ':not(:checked)' : ':checked';
+        $('#chronic input[type="checkbox"]' + selector).each(function() {
+            $(this).trigger('click');
+        });            
+    });
+        
+    $('.check-village').click(function() {    
+        var selector = $(this).is(':checked') ? ':not(:checked)' : ':checked';
+        $('#village input[type="checkbox"]' + selector).each(function() {
+            $(this).trigger('click');
+        });            
+    });
+        
+    $('.check-home').click(function() {    
+        var selector = $(this).is(':checked') ? ':not(:checked)' : ':checked';
+        $('#home input[type="checkbox"]' + selector).each(function() {
+            $(this).trigger('click');
+        });            
+    });
 JS;
 $this->registerJs($js);
 ?>
