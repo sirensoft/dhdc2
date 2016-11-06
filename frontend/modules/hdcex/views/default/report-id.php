@@ -84,6 +84,7 @@ $dataProvider = new ArrayDataProvider([
         ]);
 echo GridView::widget([
     'dataProvider' => $dataProvider,
+    'responsiveWrap' => false,
     'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'],
     'panel' => [
         'heading' => $title

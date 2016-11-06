@@ -84,6 +84,7 @@ try {
 
     echo GridView::widget([
         'dataProvider' => $dataProvider,
+        'responsiveWrap' => false,
         'formatter' => ['class' => 'yii\i18n\Formatter', 'nullDisplay' => '-'],
         'responsive' => false,
         'hover' => true,
