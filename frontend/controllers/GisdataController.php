@@ -24,9 +24,7 @@ class GisdataController extends AppController {
         $this->overclock();
         $data = file_get_contents('./gis/tambon/tambon.json');
         $data = json_decode($data, TRUE);
-
         $total = count($data['features']);
-
 
         for ($i = 0; $i < $total; $i++) {
 
