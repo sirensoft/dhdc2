@@ -15,7 +15,7 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 
 
 $sql = " SELECT * FROM gis_dhdc t WHERE CONCAT(t.PROV_CODE,t.AMP_CODE)  = '$distcode' ";
-$sql.= " AND NOTE1=1";
+//$sql.= " AND NOTE1=1";
 
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $tambon_json = [];
