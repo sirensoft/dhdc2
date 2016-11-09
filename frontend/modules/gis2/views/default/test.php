@@ -13,10 +13,10 @@ $this->registerJsFile('./lib-gis/leaflet.label.js',['position' => $this::POS_HEA
 <?php
 
 
-$sql = " select * from gis_dhdc where concat(PROV_CODE,AMP_CODE) 
-                in (SELECT t.district_code FROM sys_config_main t) ";
 
 $sql = " SELECT * FROM gis_dhdc t WHERE CONCAT(t.PROV_CODE,t.AMP_CODE)  = '$distcode' ";
+$sql.= " AND NOTE1=1";
+
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         $tambon_json = [];
         foreach ($raw as $value) {
@@ -47,9 +47,6 @@ $sql = " SELECT * FROM gis_dhdc t WHERE CONCAT(t.PROV_CODE,t.AMP_CODE)  = '$dist
     </div>
     <div class="panel-footer" id="info">
         <b><u>แผนที่ขอบเขตระดับหมู่บ้าน</u></b> กรุณาติดต่อ <a href="https://www.facebook.com/tehnn" target="_blank">ผู้พัฒนา</a>
-        <?php
-        //echo $hos_json;
-        ?>
         
     </div>
 </div>
@@ -103,26 +100,7 @@ $js = <<<JS
         
     L.control.layers(baseLayers,overlays).addTo(map);
       
-    //search
-    var searchControl = new L.Control.Search({
-		layer: hos_layer,
-		propertyName: 'SEARCH_TEXT',
-		circleLocation: false,
-		
-    });
-
-    searchControl.on('search:locationfound', function(e) {
-				
-		if(e.layer._popup)e.layer.openPopup();
-
-    }).on('search:collapsed', function(e) {
-
-		hos_layer.eachLayer(function(layer) {	
-			hos_layer.resetStyle(layer);
-		});	
-    });
-    map.addControl( searchControl );  
-    
+   
     // other function    
     function style(feature) {
         return {
