@@ -21,6 +21,13 @@ class DefaultController extends AppController {
     public function actionIndex() {
         return $this->render('index');
     }
+    
+    public function actionTest($a='6501'){
+       $this->layout = 'gis';
+
+       return $this->render('test',['distcode'=>$a]);
+        
+    }
 
     public function actionHos() {
 
