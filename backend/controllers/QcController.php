@@ -38,7 +38,7 @@ class QcController extends AppController {
     }
 
     public function actionExec() {
-        $this->permitRole([1]);
+        //$this->permitRole([1]);
         $running = \backend\models\SysProcessRunning::find()->one();
         if ($running->is_running == 'false') {    
             sleep(8);
