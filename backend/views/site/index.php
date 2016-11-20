@@ -85,7 +85,7 @@ $this->title = 'DHDC Backend';
                 //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
                 $route = yii\helpers\Url::to(['hdcsql/gate']);
                 ?>
-                <a class="btn btn-material-green btn-xlarge" href="<?= $route ?>"> 
+                <a class="btn btn-material-orange-300 btn-xlarge" href="<?= $route ?>"> 
                     <i class="glyphicon glyphicon-ok"></i> เทียบเคียง HDC  
                 </a>
 
