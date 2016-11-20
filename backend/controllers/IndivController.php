@@ -9,7 +9,7 @@ class IndivController extends \yii\web\Controller
     {
         return $this->render('index');
     }
-    public function actionExec($selyear=2015){
+    public function actionExec($selyear=2017){
         
         $model = ChospitalAmp::find()->all(); 
       

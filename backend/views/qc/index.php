@@ -1,51 +1,43 @@
 <?php
-/* @var $this yii\web\View */
+$this->title = 'ตรวจคุณภาพแฟ้มข้อมูล';
 
-use frontend\models\SysFiles;
-use yii\grid\GridView;
-use yii\data\ActiveDataProvider;
+use yii\helpers\Html;
+use yii\helpers\Url;
 
-$query = SysFiles::find();
-$models = $query->all();
+$sql =" select yearprocess from sys_config limit 1";
+$res = \Yii::$app->db->createCommand($sql)->queryOne();
+
 ?>
+<h3>ตรวจคุณภาพแฟ้มข้อมูล ปีงบ<?=$res['yearprocess']*1+543?></h3>
+<div id="res" style="display: none" class="alert alert-danger">
+    กำลังประมวลผล...
+</div>
 
-<center> 
-    <div id="res" style="display: none">
-        <img src="images/busy.gif">
-    </div>
-</center>
-<table class="table table-bordered table-striped">
-    <thead>
-    <th>แฟ้ม</th><th>ครั้งล่าสุด</th><th>คุณภาพ</th><th>#</th>
-</thead>
-<tbody>
-    <?php foreach ($models as $model): ?>
-        <tr>
-            <td><?= $model->file_name ?></td>
-            <td><?= $model->note2 ?></td>
-            <td><?= $model->qc ?></td>
-            <td><a href="#" class="btn btn-danger" id="<?=$model->file_name?>" onclick="qc('<?=$model->file_name?>')">ตรวจ</a></td>
-        </tr>
-    <?php endforeach; ?>
-</tbody>
-</table>
+<a class="btn btn-material-blue-300 btn-lg" onclick="qc_exec()">
+    ประมวลผลตรวจคุณภาพ
+</a>
+
+<?= Html::a("  ตั้งเวลา  ", ['/syssettime/index'], ['class' => 'btn btn-material-orange-300 btn-lg']) ?>
+
 
 <?php
+$link_qc = Url::to(['qc/exec']);
+?>
+<?php
+$js = <<<JS
+    function qc_exec() {  
+        $('#res').toggle();
+        $.ajax({
+            url: "$link_qc",            
+            success: function (data) {                
+                 $('#res').toggle();    
+                 if(data=='running'){
+                    alert('ไม่สามารถดำเนินการได้ ระบบกำลังประมวลผล');
+                 } 
+            }
+        });
+    }
 
-
-$script1 = <<< JS
-                
-var qc = function(fname){
-    $("+fname+").hide();
-    $.ajax({
-       url: "index.php?r=qc/"+fname,       
-       success: function(data) {                         
-           console.log(data+' สำเร็จ'); 
-       }
-    });
-}
-        
 JS;
-
-$this->registerJs($script1,  yii\web\View::POS_HEAD);
+$this->registerJs($js, yii\web\View::POS_HEAD);
 ?>

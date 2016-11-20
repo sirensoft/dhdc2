@@ -41,7 +41,7 @@ class QcController extends AppController {
         $this->permitRole([1]);
         $running = \backend\models\SysProcessRunning::find()->one();
         if ($running->is_running == 'false') {    
-                
+            sleep(8);
             
              //ใส่  store;
             $this->call("start_process", NULL);

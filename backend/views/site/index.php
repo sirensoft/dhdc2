@@ -71,21 +71,26 @@ $this->title = 'DHDC Backend';
 
             </div>
 
-            <div class="col-sm-4">                
-                <a class="btn btn-info btn-xlarge" id="btn_qc" href="#"> 
+            <div class="col-sm-4"> 
+                <?php
+                $route = \yii\helpers\Url::to(['/qc/index']);
+                ?>
+                <a class="btn btn-info btn-xlarge"  href="<?=$route?>"> 
                     <i class="glyphicon glyphicon-refresh"></i> ตรวจคุณภาพ
                 </a>
             </div>
             
-             
              <div class="col-sm-4">
                 <?php
-                $route = \Yii::$app->urlManager->createUrl('syssettime/index');
+                //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
+                $route = yii\helpers\Url::to(['hdcsql/gate']);
                 ?>
-                <a class="btn btn-material-orange-300 btn-xlarge" id="btn_set_process" href="<?=$route?>"> 
-                    <i class="glyphicon glyphicon-time"></i> ตั้งเวลาตรวจ
+                <a class="btn btn-material-green btn-xlarge" href="<?= $route ?>"> 
+                    <i class="glyphicon glyphicon-ok"></i> เทียบเคียง HDC  
                 </a>
+
             </div>
+             
 
             
             
@@ -114,17 +119,18 @@ $this->title = 'DHDC Backend';
                     <i class="glyphicon glyphicon-refresh"></i> ดู Process
                 </a>
             </div>
-            
             <div class="col-sm-4">
                 <?php
-                //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
-                $route = yii\helpers\Url::to(['hdcsql/gate']);
+                $route = Yii::$app->urlManagerFrontend->createUrl(['uploadfortythree/importall']);
+                
                 ?>
-                <a class="btn btn-material-green btn-xlarge" href="<?= $route ?>"> 
-                    <i class="glyphicon glyphicon-ok"></i> เทียบเคียง HDC  
-                </a>
+                <a class="btn btn-material-blue-300 btn-xlarge" href="<?= $route ?>" target="_blank"> 
+                    <i class="glyphicon glyphicon-compressed"></i> นำเข้า 43 แฟ้ม
+                </a>                
+               
 
             </div>
+           
            
             
             
@@ -165,18 +171,19 @@ $this->title = 'DHDC Backend';
                     </a>
                 <?php endif; ?>
             </div>
-
-            <div class="col-sm-4">
+             <div class="col-sm-4">
                 <?php
-                $route = Yii::$app->urlManagerFrontend->createUrl(['uploadfortythree/importall']);
-                
+                //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
+                $route = yii\helpers\Url::to(['cls/index', 'param' => 'value']);
                 ?>
-                <a class="btn btn-material-blue-300 btn-xlarge" href="<?= $route ?>" target="_blank"> 
-                    <i class="glyphicon glyphicon-compressed"></i> นำเข้า 43 แฟ้ม
-                </a>                
-               
+                <a class="btn btn-info btn-xlarge" href="<?=$route?>"> 
+                    <i class="glyphicon glyphicon-remove-circle"></i> Clear แฟ้ม 
+                </a>
 
             </div>
+
+
+            
 
         </div>
         <br>
@@ -205,17 +212,7 @@ $this->title = 'DHDC Backend';
 
             </div>
             
-             <div class="col-sm-4">
-                <?php
-                //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
-                $route = yii\helpers\Url::to(['cls/index', 'param' => 'value']);
-                ?>
-                <a class="btn btn-info btn-xlarge" href="<?=$route?>"> 
-                    <i class="glyphicon glyphicon-remove-circle"></i> Clear แฟ้ม 
-                </a>
-
-            </div>
-
+            
 
 
         </div>
@@ -231,7 +228,7 @@ $this->title = 'DHDC Backend';
 $route_chk_update = Yii::$app->urlManager->createUrl('update/checkver');
 
 $route_qc = Yii::$app->urlManager->createUrl('qc/exec');
-$route_indiv_exec = yii\helpers\Url::to(['indiv/exec', 'selyear' => '2016']);
+$route_indiv_exec = yii\helpers\Url::to(['indiv/exec']);
 $route_process_json = \yii\helpers\Url::to(['execute/process-json']);
 
 
@@ -260,24 +257,6 @@ $script1 = <<< JS
       
 }, 5000);
        
-  $(function () {
-    
- });
-        
-
-        
-  $('#btn_qc').on('click', function () {
-    $('#res').toggle();   
-    $.ajax({
-       url: "$route_qc",       
-       success: function(data) {
-           $('#res').toggle();    
-               if(data=='running'){
-                alert('ไม่สามารถดำเนินการได้ ระบบกำลังประมวลผล');
-               }            
-       }
-    });
- });
         
    
         
