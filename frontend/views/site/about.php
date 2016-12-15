@@ -16,6 +16,8 @@ $sys = Sysconfigmain::find()->one();
 <div class="site-about">
     <h3>โปรแกรม DHDC (District Health Data Checker)</h3>    
     <p>-Project Manager : <a href="https://www.facebook.com/tehnn" target="_blank">UTEHN PHNU</a></p>
+    <p>-Programmer : <a href="https://www.facebook.com/jub.wifi" target="_blank">JUB WIFI</a></p>
+    <p>-Reporter : <a href="https://www.facebook.com/nakharin.knott" target="_blank">KNOTT BELIEVE</a></p>
     <p>-&copy; สงวนลิขสิทธิ์ SOURCECODE ส่วนการทำงานนำเข้าไฟล์ 43 แฟ้ม</p>  
 </div>
 <div>
