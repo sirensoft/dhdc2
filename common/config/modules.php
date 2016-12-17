@@ -27,10 +27,7 @@ return [
     ],
     'mymod' => [
         'class' => 'frontend\modules\mymod\Mymod'
-    ],
-    'phr' => [
-        'class' => 'frontend\modules\phr\Phr'
-    ],
+    ],    
     'emr' => [
         'class' => 'frontend\modules\emr\Emr'
     ],
