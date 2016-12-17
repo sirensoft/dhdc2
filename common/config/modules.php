@@ -30,6 +30,9 @@ return [
     ],
     'phr' => [
         'class' => 'frontend\modules\phr\Phr'
+    ],
+    'emr'=>[
+        'class'=>'frontend\modules\emr\Emr'
     ]
 ];
 

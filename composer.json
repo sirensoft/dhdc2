@@ -29,7 +29,9 @@
         "linslin/yii2-curl": "*",
         "2amigos/yii2-google-maps-library": "*",
         "bower-asset/jquery": "@stable",
-        "scotthuangzl/yii2-google-chart": "dev-master"
+        "scotthuangzl/yii2-google-chart": "dev-master",
+        "kartik-v/yii2-tabs-x": "@dev",
+        "yii2mod/yii2-array-query": "*"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",
