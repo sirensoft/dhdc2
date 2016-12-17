@@ -4,9 +4,66 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "886c7f6647e0b8b2d327fd94c5713155",
-    "content-hash": "c19f4eaa2b136ae9fbaa8874821b99f7",
+    "hash": "2d3a4557c43e22ec3853c00a57ca1acf",
+    "content-hash": "a9ac7ee450382f532c115327a2e65592",
     "packages": [
+        {
+            "name": "2amigos/yii2-arrayquery-component",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/2amigos/yii2-arrayquery-component.git",
+                "reference": "0547ef42a28c9f10911a38273541bc89478d7faf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/2amigos/yii2-arrayquery-component/zipball/0547ef42a28c9f10911a38273541bc89478d7faf",
+                "reference": "0547ef42a28c9f10911a38273541bc89478d7faf",
+                "shasum": ""
+            },
+            "require": {
+                "yiisoft/yii2": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.*",
+                "scrutinizer/ocular": "~1.1"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "dosamigos\\arrayquery\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "2amigOS! Consulting Group",
+                    "email": "hola@2amigos.us",
+                    "homepage": "http://2amigos.us",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Yii2 component that allows for searching/filtering the elements of an array.",
+            "homepage": "http://yiiwheels.com/extension/arrayquery-component",
+            "keywords": [
+                "2amigos",
+                "arrayquery",
+                "component",
+                "extension",
+                "yii",
+                "yii 2",
+                "yii2"
+            ],
+            "time": "2015-03-16 21:42:20"
+        },
         {
             "name": "2amigos/yii2-google-maps-library",
             "version": "1.0.2",
@@ -939,6 +996,66 @@
             "time": "2016-09-13 18:15:26"
         },
         {
+            "name": "kartik-v/yii2-dynagrid",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-dynagrid.git",
+                "reference": "69432af2ccab6b07e4f75a569246f52965511279"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-dynagrid/zipball/69432af2ccab6b07e4f75a569246f52965511279",
+                "reference": "69432af2ccab6b07e4f75a569246f52965511279",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-grid": "~3.0",
+                "kartik-v/yii2-sortable": "~1.2",
+                "kartik-v/yii2-widget-activeform": "~1.4",
+                "kartik-v/yii2-widget-select2": "~2.0"
+            },
+            "type": "yii2-extension",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.4.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "kartik\\dynagrid\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Turbo charge the Yii 2 GridView with personalized columns, page size, and themes.",
+            "homepage": "https://github.com/kartik-v/yii2-dynagrid",
+            "keywords": [
+                "columns",
+                "dynamic",
+                "extension",
+                "grid",
+                "hide",
+                "order",
+                "reorder",
+                "show",
+                "sort",
+                "visibility",
+                "widget",
+                "yii2"
+            ],
+            "time": "2016-12-09 16:31:08"
+        },
+        {
             "name": "kartik-v/yii2-grid",
             "version": "dev-master",
             "source": {
@@ -1141,6 +1258,53 @@
                 "yii2"
             ],
             "time": "2016-11-03 17:25:48"
+        },
+        {
+            "name": "kartik-v/yii2-sortable",
+            "version": "v1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kartik-v/yii2-sortable.git",
+                "reference": "650dfd6876115fbb996eb6eb8f1d5d13ddb69285"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kartik-v/yii2-sortable/zipball/650dfd6876115fbb996eb6eb8f1d5d13ddb69285",
+                "reference": "650dfd6876115fbb996eb6eb8f1d5d13ddb69285",
+                "shasum": ""
+            },
+            "require": {
+                "kartik-v/yii2-krajee-base": "~1.7"
+            },
+            "type": "yii2-extension",
+            "autoload": {
+                "psr-4": {
+                    "kartik\\sortable\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Kartik Visweswaran",
+                    "email": "kartikv2@gmail.com",
+                    "homepage": "http://www.krajee.com/"
+                }
+            ],
+            "description": "Create sortable lists and grids using HTML5 drag and drop API for Yii 2.0.",
+            "homepage": "https://github.com/kartik-v/yii2-sortable",
+            "keywords": [
+                "bootstrap",
+                "extension",
+                "jquery",
+                "range",
+                "sortable",
+                "widget",
+                "yii2"
+            ],
+            "time": "2015-06-17 17:34:48"
         },
         {
             "name": "kartik-v/yii2-tabs-x",
@@ -3164,7 +3328,8 @@
         "kartik-v/dependent-dropdown": 20,
         "bower-asset/jquery": 0,
         "scotthuangzl/yii2-google-chart": 20,
-        "kartik-v/yii2-tabs-x": 20
+        "kartik-v/yii2-tabs-x": 20,
+        "kartik-v/yii2-dynagrid": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,

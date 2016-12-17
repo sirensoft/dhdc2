@@ -31,7 +31,9 @@
         "bower-asset/jquery": "@stable",
         "scotthuangzl/yii2-google-chart": "dev-master",
         "kartik-v/yii2-tabs-x": "@dev",
-        "yii2mod/yii2-array-query": "*"
+        "yii2mod/yii2-array-query": "*",
+        "2amigos/yii2-arrayquery-component" : "*",
+        "kartik-v/yii2-dynagrid": "@dev"
     },
     "require-dev": {
         "yiisoft/yii2-codeception": "*",

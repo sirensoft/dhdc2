@@ -31,8 +31,11 @@ return [
     'phr' => [
         'class' => 'frontend\modules\phr\Phr'
     ],
-    'emr'=>[
-        'class'=>'frontend\modules\emr\Emr'
-    ]
+    'emr' => [
+        'class' => 'frontend\modules\emr\Emr'
+    ],
+    'tst' => [
+        'class' => 'frontend\modules\tst\Tst',
+    ],
 ];
 
