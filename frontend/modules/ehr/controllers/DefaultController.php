@@ -8,10 +8,11 @@ use yii\data\ArrayDataProvider;
 
 
 class DefaultController extends \common\components\AppController {
-
+     public $enableCsrfValidation = false; //เพิ่ม
   
     public function actionIndex() {
-        $this->permitRole([1,2]);
+        $this->permitRole([1,2]);// เพิ่ม
+        $this->overclock();
         // connect database
         $connection = Yii::$app->db;
 

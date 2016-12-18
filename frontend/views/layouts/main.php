@@ -81,6 +81,9 @@ AppAsset::register($this);
                 $rpt_mnu_itms[] = ['label' => '<i class="glyphicon glyphicon-retweet"></i> คำสั่ง SQL', 'url' => ['/runquery/index']];
                 $rpt_mnu_itms[] = ['label' => '<i class="glyphicon glyphicon-floppy-saved"></i> โปรแกรมตัดข้อมูล', 'url' => ['/site/download']];
             }
+            $rpt_mnu_itms[]=[
+                'label' => '<i class="glyphicon glyphicon-list-alt"></i>ระบบ-EHR', 'url' => ['/ehr/default/index']
+            ];
 
 
 
