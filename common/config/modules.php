@@ -28,8 +28,8 @@ return [
     'mymod' => [
         'class' => 'frontend\modules\mymod\Mymod'
     ],    
-    'emr' => [
-        'class' => 'frontend\modules\emr\Emr'
+    'ehr' => [
+        'class' => 'frontend\modules\ehr\Ehr'
     ],
     'tst' => [
         'class' => 'frontend\modules\tst\Tst',

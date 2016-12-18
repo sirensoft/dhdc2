@@ -9,7 +9,7 @@ use kartik\grid\GridView;
 $gridColumns = [
         ['class' => 'kartik\grid\SerialColumn'],
         [
-        'attribute' => 'TRADE_NAME',
+        'attribute' => 'dname',
         'label' => 'รายการ',
         'pageSummary' => 'รวมทั้งหมด',
     ],
@@ -21,7 +21,7 @@ $gridColumns = [
         'pageSummary' => true,
         'pageSummaryOptions' => ['id' => 'total_sum'],
     ],
-        [
+     /*   [
         'attribute' => 'DRUGPRICE',
         'label' => 'ราคา/หน่วย',
         'format' => ['decimal', 2],
@@ -36,7 +36,7 @@ $gridColumns = [
         'hAlign' => 'right',
         'pageSummary' => true,
         'pageSummaryOptions' => ['id' => 'total_sum'],
-    ],
+    ],*/
 ];
 
 echo GridView::widget([

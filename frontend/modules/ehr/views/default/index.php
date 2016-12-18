@@ -10,7 +10,7 @@ use yii\jui\Tabs;
 use kartik\tabs\TabsX;
 
 ?>
-<h1><p align="center"> Electronic Medical Record</p></h1>
+<h1><p align="center"> Electronic Health Record (EHR)</p></h1>
 
 <div class="row">
     <div class="col-md-12">
@@ -45,7 +45,7 @@ use kartik\tabs\TabsX;
 
                     <?php
                     if ($sex == '1') {
-                        $ipath = Yii::$app->request->baseUrl.'/images/men.png';
+                        $ipath = Yii::$app->request->baseUrl . '/images/men.png';
                     } else {
                         $ipath = Yii::$app->request->baseUrl . '/images/women.png';
                     }
@@ -57,9 +57,10 @@ use kartik\tabs\TabsX;
                             <img src="<?= $ipath ?>" class="img-circle" alt="User Image" height="100" width="100" >
                         </div>
                         <div class="col-md-10">
-                            <p> ชื่อ-สกุล  : <?= $tname ?> </p>
+                            <p> ชื่อ-สกุล  : <?= $tname ?>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; เลขบัตรประชาชน : <?=$cid?> </p>
                             <p> ที่อยู่  : <?= $taddr ?></p>
                             <p> โรคประจำตัว  : <?= $chronic ?></p>
+                            <p> วันเกิด  : <?= $birth ?></p>
                         </div>
                     </div>
                 </div>
@@ -99,7 +100,7 @@ use kartik\tabs\TabsX;
                             'attribute' => 'hospcode',
                             'label' => 'สถานที่',
                             'value' => function($model, $key) {
-                                return Html::a($model['hospcode'], ['/emr', 'hospcode' => $model['hospcode'],
+                                return Html::a($model['hospcode'], ['/ehr', 'hospcode' => $model['hospcode'],
                                             'pid' => $model['pid'],
                                             'an' => $model['an'],
                                             'seq' => $model['seq']], ['title' => $model['hospname'],
@@ -151,7 +152,7 @@ use kartik\tabs\TabsX;
                         'align' => TabsX::ALIGN_LEFT,
                         'items' => [
                                 [
-                                'label' => 'วินิจฉัย',
+                                'label' => 'อาการ/วินิจฉัย',
                                 'content' => $this->render('diag', [
                                     'dataProvider' => $dataProvideri,
                                     'dateserv' => $dateserv,
@@ -160,7 +161,10 @@ use kartik\tabs\TabsX;
                                        'dbp'=>$dbp,
                                        'pr'=>$pr,
                                        'rr'=>$rr,
-                                       'btemp'=>$btemp
+                                       'btemp'=>$btemp,
+                                       'timeserv'=>$timeserv,
+                                       'hospname'=>$hospname,
+                                       'hospcode'=>$hospcode,
                                     
                                 ]),
                                 'active' => true
