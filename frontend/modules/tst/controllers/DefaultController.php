@@ -2,19 +2,29 @@
 
 namespace frontend\modules\tst\controllers;
 
-use yii\web\Controller;
+use common\components\AppController;
+use frontend\modules\tst\models\Cgroup;
 
 /**
  * Default controller for the `tst` module
  */
-class DefaultController extends Controller
+class DefaultController extends AppController
 {
-    /**
-     * Renders the index view for the module
-     * @return string
-     */
+   
     public function actionIndex()
     {
-        return $this->render('index');
+        
+        $searchModel = new Cgroup();
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+        return $this->render('index', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionReportItems($id=NULL,$group=NULL){
+        return $this->render('report-items',[
+            'id'=>$id,
+            'group'=>$group
+        ]);
     }
 }
