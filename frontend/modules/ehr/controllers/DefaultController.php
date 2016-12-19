@@ -46,6 +46,10 @@ class DefaultController extends \common\components\AppController {
             $hospcode = $_GET['hospcode'];
             $an = $_GET['an'];
         }
+        
+        if (isset($_GET['page'])) {
+            $cid = Yii::$app->session['cid'];
+        }
 
         // ข้อมูลบุคคล
         $sql = "SELECT p.cid,CONCAT(n.prename,p.name,' ',p.lname) AS tname,sex,
@@ -118,10 +122,10 @@ class DefaultController extends \common\components\AppController {
             ],
         ]);
         //อาการ
-        $sqlcc = "SELECT date_serv,CHIEFCOMP,sbp,dbp,pr,rr,btemp,h.hosname,
+        $sqlcc = "SELECT date_serv,CHIEFCOMP,sbp,dbp,pr,rr,btemp,h.hosname as hospname,
                     CONCAT(left(time_serv,2),':',SUBSTR(time_serv,3,2),':',right(time_serv,2)) as time_serv
                     FROM service s
-                    LEFT JOIN  chospital h ON h.hoscode = s.hospcode
+                    LEFT JOIN chospital  h ON h.hoscode = s.hospcode
                     WHERE s.hospcode='$hospcode' AND seq ='$seq' 
                     LIMIT 1";
         $datacc = $connection->createCommand($sqlcc)
@@ -135,8 +139,8 @@ class DefaultController extends \common\components\AppController {
             $pr = $datacc[$i]['pr'];
             $rr = $datacc[$i]['rr'];
             $btemp = $datacc[$i]['btemp'];
-            $hospname = $datacc[$i]['hosname'];
-            $hospname = str_replace("โรงพยาบาลส่งเสริมสุขภาพตำบล", "รพสต.", $hospname);
+            $hospname = $datacc[$i]['hospname'];
+            $hospname = str_replace("โรงพยาบาลส่งเสริมสุขภาพตำบล","รพสต.", $hospname);
             $timeserv = $datacc[$i]['time_serv'];
         }
         //LAB
