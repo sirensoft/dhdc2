@@ -4,16 +4,15 @@ namespace frontend\modules\tst\controllers;
 
 use common\components\AppController;
 use frontend\modules\tst\models\Cgroup;
+use frontend\modules\tst\models\Gkpi1;
 
 /**
  * Default controller for the `tst` module
  */
-class DefaultController extends AppController
-{
-   
-    public function actionIndex()
-    {
-        
+class DefaultController extends AppController {
+
+    public function actionIndex() {
+
         $searchModel = new Cgroup();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
         return $this->render('index', [
@@ -21,10 +20,21 @@ class DefaultController extends AppController
                     'dataProvider' => $dataProvider,
         ]);
     }
-    public function actionReportItems($id=NULL,$group=NULL){
-        return $this->render('report-items',[
-            'id'=>$id,
-            'group'=>$group
+
+    public function actionReportItems($id = NULL, $group = NULL) {
+        return $this->render('report-items', [
+                    'id' => $id,
+                    'group' => $group
         ]);
     }
+
+    public function actionKpi1() {
+        $searchModel = new Gkpi1();
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+        return $this->render('kpi1', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
+
 }
