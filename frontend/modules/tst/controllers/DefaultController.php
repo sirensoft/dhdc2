@@ -36,5 +36,8 @@ class DefaultController extends AppController {
                     'dataProvider' => $dataProvider,
         ]);
     }
+    public function actionGo($id=NULL){
+        $this->redirect(["/tst/default/kpi$id"]);
+    }
 
 }
