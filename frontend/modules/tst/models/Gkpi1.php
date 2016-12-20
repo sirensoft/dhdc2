@@ -35,6 +35,7 @@ WHERE FIND_IN_SET('1',t.pop_group)  ";
 
             $query->andFilterWhere(['hospcode'=>$this->hospcode]);
             $query->andFilterWhere(['like', 'cid', $this->cid]);
+            $query->andFilterWhere(['tmb'=> $this->tmb]);
         }
 
         return new ArrayDataProvider([
