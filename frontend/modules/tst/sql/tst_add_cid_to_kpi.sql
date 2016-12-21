@@ -207,6 +207,44 @@ FROM t_person_epi t1
 WHERE t1.mmrs_date IS NOT NULL
 );
 
+#23
+DROP TABLE IF EXISTS tst_kpi23;
+CREATE TABLE tst_kpi23(
+SELECT @b_year+543 as byear,'' cid ,CURDATE() dupdate
+
+);
+
+#24
+DROP TABLE IF EXISTS tst_kpi24;
+CREATE TABLE tst_kpi24(
+SELECT @b_year+543 as byear,t1.cid ,CURDATE() dupdate
+FROM t_person_epi t1
+WHERE t1.dts4_date IS NOT NULL
+);
+
+#25
+DROP TABLE IF EXISTS tst_kpi25;
+CREATE TABLE tst_kpi25(
+SELECT @b_year+543 as byear,p.cid ,CURDATE() dupdate
+FROM tmp_procedure_opd p
+INNER JOIN cwh_dent_icd10tm i ON p.PROCEDCODE=i.ICD10TM 
+WHERE DATE_SERV BETWEEN @start_d AND @end_d AND p.CID is not NULL
+GROUP BY p.CID 
+);
+
+#26
+DROP TABLE IF EXISTS tst_kpi26;
+CREATE TABLE tst_kpi26(
+SELECT @b_year+543 as byear,t.cid ,CURDATE() dupdate
+from tmp_diag_opd t WHERE t.DIAGCODE LIKE 'K02%'
+AND DATE_SERV BETWEEN @start_d AND @end_d
+GROUP BY t.CID
+);
+
+
+
+
+
 
 
 
