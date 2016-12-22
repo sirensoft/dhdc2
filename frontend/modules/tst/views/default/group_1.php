@@ -18,7 +18,7 @@ echo GridView::widget([
     'filterModel' => $searchModel,
     'panel' => [
         'heading' => $txt,
-        'before'=>"<h1>".$searchModel->getGroup()."</h1>"
+        'before'=>$searchModel->getGroup()
     ],
 ]);
 
