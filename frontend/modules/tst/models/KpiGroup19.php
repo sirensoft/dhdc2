@@ -5,8 +5,8 @@ use yii\data\ArrayDataProvider;
 use yii\base\Model;
 use yii2mod\query\ArrayQuery;
 
-class KpiGroup24 extends Model {
-    protected $group_id=24;
+class KpiGroup19 extends Model {
+    protected $group_id=19;
     public $hospcode, $cid,$name,$lname,$birth,$sex,$type,$amp,$tmb,$vil,$adr;
     public function rules() {
         return [

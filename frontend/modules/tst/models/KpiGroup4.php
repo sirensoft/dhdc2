@@ -5,8 +5,8 @@ use yii\data\ArrayDataProvider;
 use yii\base\Model;
 use yii2mod\query\ArrayQuery;
 
-class KpiGroup24 extends Model {
-    protected $group_id=24;
+class KpiGroup4 extends Model {
+    protected $group_id=4;
     public $hospcode, $cid,$name,$lname,$birth,$sex,$type,$amp,$tmb,$vil,$adr;
     public function rules() {
         return [
@@ -16,17 +16,13 @@ class KpiGroup24 extends Model {
     public function search($params = null) {
       
         $sql ="SELECT p.HOSPCODE hospcode,t.cid,p.`NAME` name,p.LNAME lname,p.BIRTH birth,p.SEX sex,p.TYPEAREA type
-,tmb.tambonname tmb,RIGHT(p.vhid,2) vil,'' adr ";
-
-        
-$q = " SELECT t.id from tst_citems t WHERE t.cgroup_id =$this->group_id ";
-$qq = \Yii::$app->db->createCommand($q)->queryColumn();
-foreach ($qq as $a){
-$sql.= " ,(SELECT 'Yes' FROM tst_kpi$a a WHERE a.cid=t.cid ) _$a  ";
-}
+,tmb.tambonname tmb,RIGHT(p.vhid,2) vil,'' adr
 
 
-$sql .= " 
+,(SELECT 'Yes' FROM tst_kpi8 a WHERE a.cid=t.cid ) _8
+
+
+
 FROM tst_pop t 
 LEFT JOIN t_person_cid p on t.cid = p.cid
 LEFT JOIN campur amp on amp.ampurcodefull = LEFT(p.vhid,4)
