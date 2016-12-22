@@ -76,7 +76,7 @@ WHERE FIND_IN_SET($this->group_id,t.pop_group)  ";
     }
 
     public function getKpi(){
-        $sql = " select id,item_name from tst_citems where cgroup_id= $this->group_id ";
+        $sql = " select * from tst_citems where cgroup_id= $this->group_id ";
         $raw = \Yii::$app->db->createCommand($sql)->queryAll();
         return $raw;
     }

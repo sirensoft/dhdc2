@@ -12,7 +12,11 @@ use yii\helpers\Html;
 $array = $searchModel->getKpi();
 $txt ='';
 foreach ($array as $value) {
-    $txt.= $value['id']."-".$value['item_name']."<br>";
+    if($value['note1']=='ok'){
+        $txt.= $value['id']."-".$value['item_name']."<br>";
+    }else{
+        $txt.= $value['id']."-".$value['item_name']." (x)<br>";
+    }
 }
 
 
