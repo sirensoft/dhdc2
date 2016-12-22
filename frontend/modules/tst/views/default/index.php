@@ -7,7 +7,10 @@ use \dosamigos\arrayquery\ArrayQuery;
 use yii\helpers\Html;
 $this->title = "ระบบประเมินผลงาน(เวอร์ชั่น อ.เทพสถิต)";
 
-$this->params['breadcrumbs'][] = 'กิจกรรมสาธารณสุขรายบุคคล'
+$sql = "SELECT yearprocess+543 from sys_config LIMIT 1";
+$byear = \Yii::$app->db->createCommand($sql)->queryScalar();
+
+$this->params['breadcrumbs'][] = "กิจกรรมสาธารณสุขรายบุคคล ปีงบประมาณ ".$byear
 ?>
 
 <div class="tst-default-index">

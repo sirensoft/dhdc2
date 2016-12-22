@@ -1,6 +1,9 @@
 <?php
+$sql = "SELECT yearprocess+543 from sys_config LIMIT 1";
+$byear = \Yii::$app->db->createCommand($sql)->queryScalar();
+
 $this->title = "ระบบประเมินผลงาน(เวอร์ชั่น อ.เทพสถิต)";
-$this->params['breadcrumbs'][] = ['url'=>['/tst'],'label'=>'กิจกรรมสาธารณสุขรายบุคคล'];
+$this->params['breadcrumbs'][] = ['url'=>['/tst'],'label'=>"กิจกรรมสาธารณสุขรายบุคคล ปีงบประมาณ $byear"];
 $this->params['breadcrumbs'][] = $searchModel->getGroup();
 
 use kartik\grid\GridView;
