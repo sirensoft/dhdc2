@@ -327,20 +327,125 @@ AND date_screen BETWEEN @start_d AND @end_d
 GROUP BY cid
 );
 
+#35
+DROP TABLE IF EXISTS tst_kpi35;
+CREATE TABLE tst_kpi35(
+SELECT @b_year+543 as byear,t.cid ,CURDATE() dupdate
+FROM tst_pop t 
+INNER JOIN tmp_diag_opd d on d.CID = t.cid  AND d.DATE_SERV BETWEEN @start_d AND @end_d
+INNER JOIN cdisease c ON d.DIAGCODE = c.diagcode AND c.codemental IS NOT NULL
+WHERE FIND_IN_SET('23',t.pop_group)
+GROUP BY t.cid
+);
 
 
+#36
+DROP TABLE IF EXISTS tst_kpi36;
+CREATE TABLE tst_kpi36(
+SELECT @b_year+543 as byear,t.cid ,CURDATE() dupdate
+from t_chronic t
+WHERE date_dx BETWEEN @start_d AND @end_d
+AND t.diagcode LIKE 'E%'
+GROUP BY t.cid
+);
+
+#37
+DROP TABLE IF EXISTS tst_kpi37;
+CREATE TABLE tst_kpi37(
+SELECT @b_year+543 as byear,f.cid ,CURDATE() dupdate
+FROM t_chronicfu f 
+INNER JOIN t_dmht d ON f.cid=d.cid
+WHERE  f.control_dm IN(1) AND f.ld_hba1c BETWEEN @start_d AND @end_d
+GROUP BY f.cid
+);
+
+#38
+DROP TABLE IF EXISTS tst_kpi38;
+CREATE TABLE tst_kpi38(
+SELECT @b_year+543 as byear,p.cid ,CURDATE() dupdate
+FROM tmp_procedure_opd p
+INNER JOIN cwh_dent_icd10tm i ON p.PROCEDCODE=i.ICD10TM 
+INNER JOIN tst_pop tp ON tp.cid = p.CID AND  FIND_IN_SET('24',tp.pop_group)
+WHERE DATE_SERV BETWEEN @start_d AND @end_d AND p.CID is not NULL
+GROUP BY p.CID 
+);
+
+#39
+DROP TABLE IF EXISTS tst_kpi39;
+CREATE TABLE tst_kpi39(
+SELECT @b_year+543 as byear,t.cid ,CURDATE() dupdate
+ FROM t_chronicfu t
+INNER JOIN tst_pop p ON p.cid = t.cid AND FIND_IN_SET('24',p.pop_group)
+AND t.ld_foot BETWEEN @start_d AND @end_d
+GROUP BY t.cid
+);
 
 
+#40
+DROP TABLE IF EXISTS tst_kpi40;
+CREATE TABLE tst_kpi40(
+SELECT @b_year+543 as byear,t.cid ,CURDATE() dupdate
+FROM t_chronicfu t
+INNER JOIN tst_pop p ON p.cid = t.cid AND FIND_IN_SET('24',p.pop_group)
+AND t.ld_retina BETWEEN @start_d AND @end_d
+GROUP BY t.cid
+);
+
+#41
+DROP TABLE IF EXISTS tst_kpi41;
+CREATE TABLE tst_kpi41(
+SELECT @b_year+543 as byear,t.cid ,CURDATE() dupdate
+from t_chronic t
+WHERE date_dx BETWEEN @start_d AND @end_d
+AND t.diagcode LIKE 'I%'
+GROUP BY t.cid
+);
+
+#42
+DROP TABLE IF EXISTS tst_kpi42;
+CREATE TABLE tst_kpi42(
+SELECT @b_year+543 as byear,f.cid ,CURDATE() dupdate
+FROM t_chronicfu f 
+INNER JOIN t_dmht d ON f.cid=d.cid
+WHERE  f.control_ht IN(1) AND f.ld_bp1 BETWEEN @start_d AND @end_d
+GROUP BY f.cid
+);
+
+#43
+DROP TABLE IF EXISTS tst_kpi43;
+CREATE TABLE tst_kpi43(
+SELECT @b_year+543 as byear,t.CID ,CURDATE() dupdate
+
+from t_cvdrisk_fl t WHERE t.L_RISK_SCORE > 0
+GROUP BY t.CID
+
+);
+
+#44
+DROP TABLE IF EXISTS tst_kpi44;
+CREATE TABLE tst_kpi44(
+SELECT @b_year+543 as byear,t.CID ,CURDATE() dupdate
+FROM t_adl_last_regist t
+WHERE t.DATE_SERV BETWEEN @start_d AND @end_d
+GROUP BY t.CID
+
+);
+
+#45
+DROP TABLE IF EXISTS tst_kpi45;
+CREATE TABLE tst_kpi45(
+SELECT @b_year+543 as byear,t.CID ,CURDATE() dupdate
 
 
+);
+
+#45
+DROP TABLE IF EXISTS tst_kpi45;
+CREATE TABLE tst_kpi45(
+SELECT @b_year+543 as byear,t.CID ,CURDATE() dupdate
 
 
-
-
-
-
-
-
+);
 
 
 
