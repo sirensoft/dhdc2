@@ -29,6 +29,7 @@ class DefaultController extends AppController {
     }
 
     public function actionGroup($group_id=NULL) {
+        
         if($group_id==1)$searchModel = new \frontend\modules\tst\models\KpiGroup1();
         if($group_id==24)$searchModel = new \frontend\modules\tst\models\KpiGroup24();
         
@@ -41,17 +42,7 @@ class DefaultController extends AppController {
         ]);
     }
     
-      public function actionGroup_24() {
-        $searchModel = new \frontend\modules\tst\models\KpiGroup24();
-        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
-        return $this->render('group_24', [
-                    'searchModel' => $searchModel,
-                    'dataProvider' => $dataProvider,
-        ]);
-    }
-    
-    
-    
+     
     
     
   
