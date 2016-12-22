@@ -16,14 +16,14 @@ class KpiGroup1 extends Model {
     public function search($params = null) {
       
         $sql ="SELECT p.HOSPCODE hospcode,t.cid,p.`NAME` name,p.LNAME lname,p.BIRTH birth,p.SEX sex,p.TYPEAREA type
-,amp.ampurname amp,tmb.tambonname tmb,RIGHT(p.vhid,2) vil,'' adr
+,tmb.tambonname tmb,RIGHT(p.vhid,2) vil,'' adr
 
 
-,(SELECT 'Y' FROM tst_kpi1 a WHERE a.cid=t.cid ) _1
-,(SELECT 'Y' FROM tst_kpi2 a WHERE a.cid=t.cid ) _2
-,(SELECT 'Y' FROM tst_kpi3 a WHERE a.cid=t.cid ) _3
-,(SELECT 'Y' FROM tst_kpi4 a WHERE a.cid=t.cid ) _4
-,(SELECT 'Y' FROM tst_kpi5 a WHERE a.cid=t.cid ) _5
+,(SELECT 'Yes' FROM tst_kpi1 a WHERE a.cid=t.cid ) _1
+,(SELECT 'Yes' FROM tst_kpi2 a WHERE a.cid=t.cid ) _2
+,(SELECT 'Yes' FROM tst_kpi3 a WHERE a.cid=t.cid ) _3
+,(SELECT 'Yes' FROM tst_kpi4 a WHERE a.cid=t.cid ) _4
+,(SELECT 'Yes' FROM tst_kpi5 a WHERE a.cid=t.cid ) _5
 
 
 FROM tst_pop t 
@@ -63,6 +63,17 @@ WHERE FIND_IN_SET($this->group_id,t.pop_group)  ";
                 'pageSize'=>100
             ]
         ]);
+    }
+    
+    public function attributeLabels()
+    {
+        return [
+            'hospcode'=>'Hosp',
+            'tmb' => 'ตำบล',
+            'vil' => 'ม.',
+            'adr' => 'บ.',
+            
+        ];
     }
 
     public function getKpi(){

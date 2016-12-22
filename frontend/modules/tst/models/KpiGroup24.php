@@ -16,13 +16,15 @@ class KpiGroup24 extends Model {
     public function search($params = null) {
       
         $sql ="SELECT p.HOSPCODE hospcode,t.cid,p.`NAME` name,p.LNAME lname,p.BIRTH birth,p.SEX sex,p.TYPEAREA type
-,amp.ampurname amp,tmb.tambonname tmb,RIGHT(p.vhid,2) vil,'' adr
+,tmb.tambonname tmb,RIGHT(p.vhid,2) vil,'' adr
 
-,(SELECT 'Y' FROM tst_kpi36 a WHERE a.cid=t.cid ) _36
-,(SELECT 'Y' FROM tst_kpi37 a WHERE a.cid=t.cid ) _37
-,(SELECT 'Y' FROM tst_kpi38 a WHERE a.cid=t.cid ) _38
-,(SELECT 'Y' FROM tst_kpi39 a WHERE a.cid=t.cid ) _39
-,(SELECT 'Y' FROM tst_kpi40 a WHERE a.cid=t.cid ) _40
+
+,(SELECT 'Yes' FROM tst_kpi36 a WHERE a.cid=t.cid ) _36
+,(SELECT 'Yes' FROM tst_kpi37 a WHERE a.cid=t.cid ) _37
+,(SELECT 'Yes' FROM tst_kpi38 a WHERE a.cid=t.cid ) _38
+,(SELECT 'Yes' FROM tst_kpi39 a WHERE a.cid=t.cid ) _39
+,(SELECT 'Yes' FROM tst_kpi40 a WHERE a.cid=t.cid ) _40
+
 
 FROM tst_pop t 
 LEFT JOIN t_person_cid p on t.cid = p.cid
@@ -45,18 +47,32 @@ WHERE FIND_IN_SET($this->group_id,t.pop_group)  ";
             $query->andFilterWhere(['like', 'vil', $this->vil]);
             $query->andFilterWhere(['like', 'sex', $this->sex]);
             $query->andFilterWhere(['like', 'type', $this->type]);
+            
         }
-
+        $all_models = $query->all();
+        if (!empty($all_models[0])) {
+            $cols = array_keys($all_models[0]);
+        }
         return new ArrayDataProvider([
-            'allModels' => $query->all(),
+            'allModels' => $all_models,
             //'totalItems'=>100,
             'sort' => [
-                'attributes' => [ 'hospcode'],
+                'attributes' => $cols
             ],
             'pagination'=>[
                 'pageSize'=>100
             ]
         ]);
+    }
+    public function attributeLabels()
+    {
+        return [
+            'hospcode'=>'Hosp',
+            'tmb' => 'ตำบล',
+            'vil' => 'ม.',
+            'adr' => 'บ.',
+            
+        ];
     }
 
     public function getKpi(){
