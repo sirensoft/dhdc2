@@ -4,6 +4,7 @@ $this->params['breadcrumbs'][] = ['url'=>['/tst'],'label'=>'กิจกรร�
 $this->params['breadcrumbs'][] = $searchModel->getGroup();
 
 use kartik\grid\GridView;
+use yii\helpers\Html;
 
 $array = $searchModel->getKpi();
 $txt ='';
@@ -17,7 +18,7 @@ echo GridView::widget([
     'filterModel' => $searchModel,
     'panel' => [
         'heading' => $txt,
-        'before'=>$searchModel->getGroup()
+        'before'=>"<h1>".$searchModel->getGroup()."</h1>"
     ],
 ]);
 
