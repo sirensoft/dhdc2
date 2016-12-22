@@ -5,8 +5,8 @@ use yii\data\ArrayDataProvider;
 use yii\base\Model;
 use yii2mod\query\ArrayQuery;
 
-class KpiGroup1 extends Model {
-    protected $group_id=1;
+class KpiGroup24 extends Model {
+    protected $group_id=24;
     public $hospcode, $cid,$name,$lname,$birth,$sex,$type,$amp,$tmb,$vil,$adr;
     public function rules() {
         return [
@@ -18,11 +18,11 @@ class KpiGroup1 extends Model {
         $sql ="SELECT p.HOSPCODE hospcode,t.cid,p.`NAME` name,p.LNAME lname,p.BIRTH birth,p.SEX sex,p.TYPEAREA type
 ,amp.ampurname amp,tmb.tambonname tmb,RIGHT(p.vhid,2) vil,'' adr
 
-,(SELECT 'Y' FROM tst_kpi1 a WHERE a.cid=t.cid ) _1
-,(SELECT 'Y' FROM tst_kpi2 a WHERE a.cid=t.cid ) _2
-,(SELECT 'Y' FROM tst_kpi3 a WHERE a.cid=t.cid ) _3
-,(SELECT 'Y' FROM tst_kpi4 a WHERE a.cid=t.cid ) _4
-,(SELECT 'Y' FROM tst_kpi5 a WHERE a.cid=t.cid ) _5
+,(SELECT 'Y' FROM tst_kpi36 a WHERE a.cid=t.cid ) _36
+,(SELECT 'Y' FROM tst_kpi37 a WHERE a.cid=t.cid ) _37
+,(SELECT 'Y' FROM tst_kpi38 a WHERE a.cid=t.cid ) _38
+,(SELECT 'Y' FROM tst_kpi39 a WHERE a.cid=t.cid ) _39
+,(SELECT 'Y' FROM tst_kpi40 a WHERE a.cid=t.cid ) _40
 
 FROM tst_pop t 
 LEFT JOIN t_person_cid p on t.cid = p.cid
@@ -45,7 +45,6 @@ WHERE FIND_IN_SET($this->group_id,t.pop_group)  ";
             $query->andFilterWhere(['like', 'vil', $this->vil]);
             $query->andFilterWhere(['like', 'sex', $this->sex]);
             $query->andFilterWhere(['like', 'type', $this->type]);
-            
         }
 
         return new ArrayDataProvider([

@@ -31,11 +31,29 @@ class DefaultController extends AppController {
     public function actionGroup_1() {
         $searchModel = new \frontend\modules\tst\models\KpiGroup1();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
-        return $this->render('kpi1', [
+        return $this->render('group_1', [
                     'searchModel' => $searchModel,
                     'dataProvider' => $dataProvider,
         ]);
     }
+    
+      public function actionGroup_24() {
+        $searchModel = new \frontend\modules\tst\models\KpiGroup24();
+        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
+        return $this->render('group_24', [
+                    'searchModel' => $searchModel,
+                    'dataProvider' => $dataProvider,
+        ]);
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
     public function actionGo($id=NULL){
         $this->redirect(["/tst/default/group_$id"]);
     }
