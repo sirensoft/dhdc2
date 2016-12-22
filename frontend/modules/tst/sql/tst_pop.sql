@@ -1,4 +1,3 @@
-
 BEGIN
 	
 SET	@b_year:=(SELECT yearprocess FROM sys_config LIMIT 1);

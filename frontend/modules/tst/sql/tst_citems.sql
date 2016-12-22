@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50542
 File Encoding         : 65001
 
-Date: 2016-12-22 23:07:39
+Date: 2016-12-22 23:13:44
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -53,9 +53,9 @@ INSERT INTO `tst_citems` VALUES ('18', 'มีภาวะเริ่มอ้�
 INSERT INTO `tst_citems` VALUES ('19', 'สูงดีสมส่วน', '11', 'ok', null, null);
 INSERT INTO `tst_citems` VALUES ('20', 'ได้รับการตรวจสุขภาพช่องปาก ', '12', 'ok', null, null);
 INSERT INTO `tst_citems` VALUES ('21', 'ได้รับการเคลือบหลุมร่องฟัน( ฟันแท้ )', '12', 'ok', null, null);
-INSERT INTO `tst_citems` VALUES ('22', 'วัคซีน', '12', 'ok', null, null);
+INSERT INTO `tst_citems` VALUES ('22', 'วัคซีน MMRS', '12', 'ok', null, null);
 INSERT INTO `tst_citems` VALUES ('23', 'วัคซีน', '13', '', null, null);
-INSERT INTO `tst_citems` VALUES ('24', 'วัคซีน', '14', 'ok', null, null);
+INSERT INTO `tst_citems` VALUES ('24', 'วัคซีน DTS', '14', 'ok', null, null);
 INSERT INTO `tst_citems` VALUES ('25', 'ได้รับบริการทันตกรรม', '15', 'ok', null, null);
 INSERT INTO `tst_citems` VALUES ('26', 'ฟันดีไม่มีผุ(cavityfree)', '16', 'ok', null, null);
 INSERT INTO `tst_citems` VALUES ('27', 'โภชนาการ', '17', 'ok', null, null);

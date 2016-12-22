@@ -1,3 +1,5 @@
+BEGIN
+
 SET	@b_year:=(SELECT yearprocess FROM sys_config LIMIT 1);
 SET	@start_d:=concat(@b_year-1,'1001');
 SET @end_d:=concat(@b_year,'0930');
@@ -41,7 +43,11 @@ SELECT @b_year+543 as byear,'' cid ,CURDATE() dupdate
 #5
 DROP TABLE IF EXISTS tst_kpi5;
 CREATE TABLE tst_kpi5 (
-SELECT @b_year+543 as byear,'' cid ,CURDATE() dupdate
+SELECT @b_year+543 as byear,p.cid ,CURDATE() dupdate
+FROM prenatal t 
+INNER JOIN t_person_cid p ON p.hospcode = t.hospcode AND p.pid = t.pid
+WHERE t.HCT_RESULT <= 33  AND t.DATE_HCT BETWEEN @start_d AND @end_d
+GROUP BY p.CID
 );
 
 #6
@@ -434,24 +440,19 @@ GROUP BY t.CID
 #45
 DROP TABLE IF EXISTS tst_kpi45;
 CREATE TABLE tst_kpi45(
-SELECT @b_year+543 as byear,t.CID ,CURDATE() dupdate
+SELECT @b_year+543 as byear,''CID ,CURDATE() dupdate
 
 
 );
 
-#45
-DROP TABLE IF EXISTS tst_kpi45;
-CREATE TABLE tst_kpi45(
-SELECT @b_year+543 as byear,t.CID ,CURDATE() dupdate
+#46
+DROP TABLE IF EXISTS tst_kpi46;
+CREATE TABLE tst_kpi46(
+SELECT @b_year+543 as byear,'' CID ,CURDATE() dupdate
 
 
 );
 
 
 
-
-
-
-
-
-
+END
