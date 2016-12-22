@@ -5,7 +5,7 @@ use kartik\grid\GridView;
 use yii\data\ArrayDataProvider;
 use \dosamigos\arrayquery\ArrayQuery;
 use yii\helpers\Html;
-$this->title = "ระบบประเมินผลงาน(เวอร์ชั่น อ.เทพสถิต)";
+$this->title = "โมดูล อ.เทพสถิต";
 
 $sql = "SELECT yearprocess+543 from sys_config LIMIT 1";
 $byear = \Yii::$app->db->createCommand($sql)->queryScalar();
