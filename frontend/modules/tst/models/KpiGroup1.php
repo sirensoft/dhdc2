@@ -18,11 +18,13 @@ class KpiGroup1 extends Model {
         $sql ="SELECT p.HOSPCODE hospcode,t.cid,p.`NAME` name,p.LNAME lname,p.BIRTH birth,p.SEX sex,p.TYPEAREA type
 ,amp.ampurname amp,tmb.tambonname tmb,RIGHT(p.vhid,2) vil,'' adr
 
+
 ,(SELECT 'Y' FROM tst_kpi1 a WHERE a.cid=t.cid ) _1
 ,(SELECT 'Y' FROM tst_kpi2 a WHERE a.cid=t.cid ) _2
 ,(SELECT 'Y' FROM tst_kpi3 a WHERE a.cid=t.cid ) _3
 ,(SELECT 'Y' FROM tst_kpi4 a WHERE a.cid=t.cid ) _4
 ,(SELECT 'Y' FROM tst_kpi5 a WHERE a.cid=t.cid ) _5
+
 
 FROM tst_pop t 
 LEFT JOIN t_person_cid p on t.cid = p.cid
@@ -47,12 +49,15 @@ WHERE FIND_IN_SET($this->group_id,t.pop_group)  ";
             $query->andFilterWhere(['like', 'type', $this->type]);
             
         }
-
+        $all_models = $query->all();
+        if (!empty($all_models[0])) {
+            $cols = array_keys($all_models[0]);
+        }
         return new ArrayDataProvider([
-            'allModels' => $query->all(),
+            'allModels' => $all_models,
             //'totalItems'=>100,
             'sort' => [
-                'attributes' => [ 'hospcode'],
+                'attributes' => $cols
             ],
             'pagination'=>[
                 'pageSize'=>100

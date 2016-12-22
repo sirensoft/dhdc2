@@ -30,7 +30,7 @@ $this->params['breadcrumbs'][] = 'กิจกรรมสาธารณสุ�
                 'label' => 'กลุ่มเป้าหมาย',
                 'format'=>'raw',
                 'value'=>function($model){
-                    return Html::a($model['group'],['/tst/default/go','id'=>$model['id']]);
+                    return Html::a($model['group'],['/tst/default/group','group_id'=>$model['id']]);
                 }
             ],
             [
