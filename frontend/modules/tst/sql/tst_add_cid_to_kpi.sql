@@ -241,6 +241,96 @@ AND DATE_SERV BETWEEN @start_d AND @end_d
 GROUP BY t.CID
 );
 
+#27
+DROP TABLE IF EXISTS tst_kpi27;
+CREATE TABLE tst_kpi27(
+SELECT @b_year+543 as byear,cid ,CURDATE() dupdate
+from t_nutrition6up n
+WHERE age_ms1 BETWEEN 72 AND 228
+AND DATE_SERV1 BETWEEN @start_d AND @end_d
+GROUP BY CID
+);
+
+#28
+DROP TABLE IF EXISTS tst_kpi28;
+CREATE TABLE tst_kpi28(
+SELECT @b_year+543 as byear,'' cid ,CURDATE() dupdate
+
+);
+
+#29
+DROP TABLE IF EXISTS tst_kpi29;
+CREATE TABLE tst_kpi29(
+SELECT @b_year+543 as byear,'' cid ,CURDATE() dupdate
+
+);
+
+#30
+DROP TABLE IF EXISTS tst_kpi30;
+CREATE TABLE tst_kpi30(
+SELECT @b_year+543 as byear,cid ,CURDATE() dupdate
+from (
+SELECT d.HOSPCODE,d.PID,d.DIAGCODE,d.DATE_SERV from diagnosis_opd d WHERE LEFT(d.DIAGCODE,4) in ('Z014','Z124') 
+AND d.DATE_SERV  BETWEEN DATE_SUB(@start_d,INTERVAL 5 YEAR) AND DATE_SUB(@end_d,INTERVAL 0 YEAR)
+) t  INNER JOIN t_person_cid p ON p.HOSPCODE = t.hospcode AND p.PID = t.pid
+GROUP BY p.CID
+);
+
+#31
+DROP TABLE IF EXISTS tst_kpi31;
+CREATE TABLE tst_kpi31(
+SELECT @b_year+543 as byear,cid ,CURDATE() dupdate
+ from (
+SELECT d.HOSPCODE,d.PID,d.DIAGCODE,d.DATE_SERV from diagnosis_opd d WHERE LEFT(d.DIAGCODE,4) in ('Z123') 
+AND d.DATE_SERV  BETWEEN DATE_SUB(@start_d,INTERVAL 0 YEAR) AND DATE_SUB(@end_d,INTERVAL 0 YEAR)
+) t  INNER JOIN t_person_cid p ON p.HOSPCODE = t.hospcode AND p.PID = t.pid
+GROUP BY p.CID
+);
+
+#32
+DROP TABLE IF EXISTS tst_kpi32;
+CREATE TABLE tst_kpi32(
+SELECT @b_year+543 as byear,cid ,CURDATE() dupdate
+from (
+SELECT p.HOSPCODE,p.PID,p.CID,p.SEX,n.DATE_SERV,round(n.WAIST_CM) WAIST_CM
+,n.WEIGHT,n.HEIGHT,round(n.WEIGHT/((n.HEIGHT/100)*(n.HEIGHT/100)),2) bmi
+,if(p.sex='1' AND round(n.WAIST_CM)<=90,1,if(p.sex='2' AND round(n.WAIST_CM)<=80,1,0)) fat
+,DATE_FORMAT(n.DATE_SERV,'%m') m
+FROM t_ncdscreen n 
+INNER JOIN t_person_db p ON n.HOSPCODE=p.HOSPCODE AND n.PID=p.PID 
+WHERE 
+n.DATE_SERV BETWEEN @start_d AND @end_d 
+AND TIMESTAMPDIFF(YEAR,p.BIRTH,n.DATE_SERV)>=35 
+GROUP BY p.HOSPCODE,p.PID 
+HAVING fat=1
+ORDER BY n.DATE_SERV
+) t GROUP BY cid
+);
+
+#33
+DROP TABLE IF EXISTS tst_kpi33;
+CREATE TABLE tst_kpi33(
+SELECT @b_year+543 as byear,cid ,CURDATE() dupdate
+FROM t_person_dm_screen 
+WHERE date_screen is not null AND bslevel >70
+AND date_screen BETWEEN @start_d AND @end_d
+GROUP BY cid
+);
+
+#34
+DROP TABLE IF EXISTS tst_kpi34;
+CREATE TABLE tst_kpi34(
+SELECT @b_year+543 as byear,cid ,CURDATE() dupdate
+FROM t_person_ht_screen   
+WHERE sbp_1>50 AND dbp_1 >50
+AND date_screen BETWEEN @start_d AND @end_d
+GROUP BY cid
+);
+
+
+
+
+
 
 
 
