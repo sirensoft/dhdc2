@@ -13,6 +13,7 @@ class KpiGroup27 extends Model {
             [['hospcode', 'cid','name','lname','birth','sex','type','amp','tmb','vil','adr'], 'safe'],
         ];
     }
+    
     public function search($params = null) {
       
         $sql ="SELECT p.HOSPCODE hospcode,t.cid,p.`NAME` name,p.LNAME lname,p.BIRTH birth,p.SEX sex,p.TYPEAREA type
@@ -24,7 +25,6 @@ $qq = \Yii::$app->db->createCommand($q)->queryColumn();
 foreach ($qq as $a){
 $sql.= " ,(SELECT 'Yes' FROM tst_kpi$a a WHERE a.cid=t.cid ) _$a  ";
 }
-
 
 $sql .= " 
 FROM tst_pop t 
@@ -53,13 +53,11 @@ WHERE FIND_IN_SET($this->group_id,t.pop_group)  ";
         $all_models = $query->all();
         if (!empty($all_models[0])) {
             $cols = array_keys($all_models[0]);
-        }
+        } 
         return new ArrayDataProvider([
             'allModels' => $all_models,
             //'totalItems'=>100,
-            'sort' => [
-                'attributes' => $cols
-            ],
+            'sort' => !empty($cols)?['attributes' => $cols ]:FALSE,
             'pagination'=>[
                 'pageSize'=>100
             ]
