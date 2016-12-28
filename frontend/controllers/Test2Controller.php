@@ -125,5 +125,11 @@ class Test2Controller extends \yii\web\Controller {
     public function actionTestFilter(){
         return $this->render('test-filter');
     }
+    
+    public function actionTestFunc($t=NULL){
+        if($t<>'epi' && $t<>'disability'){
+            echo "TRUE";
+        }
+    }
 
 }
