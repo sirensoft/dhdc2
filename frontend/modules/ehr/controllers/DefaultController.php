@@ -6,6 +6,9 @@ use yii\web\Controller;
 use Yii;
 use yii\data\ArrayDataProvider;
 
+use common\components\MyHelper;
+use frontend\models\LogEhr;
+
 
 class DefaultController extends \common\components\AppController {
      public $enableCsrfValidation = false; //เพิ่ม
@@ -36,9 +39,21 @@ class DefaultController extends \common\components\AppController {
         $birth ='';
         
         
-        if (Yii::$app->request->isPost) {
-            $cid = Yii::$app->request->post('cid');
+        if (\Yii::$app->request->isPost) {
+            
+            $cid = \Yii::$app->request->post('cid');          
             Yii::$app->session['cid'] = $cid;
+            
+            $log = new LogEhr();
+            $log->username = MyHelper::getUserName();
+            $log->patient_cid = $cid;
+            $log->datetime = date('Y-m-d H:i:s');
+            $log->ip= \Yii::$app->request->getUserIP();
+            
+            if($log->save()){
+                //MyHelper::setAlert('success','......');
+            }
+            
         }
         if (isset($_GET['hospcode'])) {
             $cid = Yii::$app->session['cid'];
