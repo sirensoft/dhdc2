@@ -7,7 +7,8 @@ use Yii;
 use yii\data\ArrayDataProvider;
 
 use common\components\MyHelper;
-use frontend\models\LogEhr;
+use frontend\modules\ehr\models\LogEhr;
+use frontend\modules\ehr\models\OnOffEhr;
 
 
 class DefaultController extends \common\components\AppController {
@@ -15,6 +16,11 @@ class DefaultController extends \common\components\AppController {
   
     public function actionIndex() {
         $this->permitRole([1,2]);// เพิ่ม
+        
+        $onoff  = OnOffEhr::find()->one();
+        if($onoff->status !== 'on'){
+            throw  new \yii\web\ConflictHttpException('ปิด');
+        }
         $this->overclock();
         // connect database
         $connection = Yii::$app->db;
