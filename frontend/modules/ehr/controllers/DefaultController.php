@@ -19,7 +19,7 @@ class DefaultController extends \common\components\AppController {
         
         $onoff  = OnOffEhr::find()->one();
         if($onoff->status !== 'on'){
-            throw  new \yii\web\ConflictHttpException('ปิด');
+            throw  new \yii\web\ConflictHttpException('ระบบ EHR ถูกปิด');
         }
         $this->overclock();
         // connect database
