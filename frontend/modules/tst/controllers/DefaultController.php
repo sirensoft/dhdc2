@@ -12,6 +12,7 @@ use frontend\modules\tst\models\Cgroup;
 class DefaultController extends AppController {
 
     public function actionIndex() {
+        
 
         $searchModel = new Cgroup();
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
@@ -29,6 +30,7 @@ class DefaultController extends AppController {
     }
 
     public function actionGroup($group_id=NULL) {
+        $this->permitRole([1,2]);
         $this->overclock();
         if($group_id==1)$searchModel = new \frontend\modules\tst\models\KpiGroup1();
         if($group_id==2)$searchModel = new \frontend\modules\tst\models\KpiGroup2();
