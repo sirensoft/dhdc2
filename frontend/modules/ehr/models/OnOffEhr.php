@@ -10,15 +10,20 @@ use yii\db\ActiveRecord;
  * @property string $status
 
  */
-class OnOffEhr extends ActiveRecord{
-    public static function tableName()
-    {
+class OnOffEhr extends ActiveRecord {
+
+    public static function tableName() {
         return 'ehr_onoff';
     }
-    
+
+    public static  function primaryKey() {
+        return ['status'];
+    }
+
     public function rules() {
         return [
-            [['status'],'safe']
+            [['status'], 'safe']
         ];
     }
+
 }

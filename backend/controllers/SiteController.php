@@ -9,6 +9,7 @@ use common\models\LoginForm;
 use yii\filters\VerbFilter;
 use common\components\AppController;
 use yii\data\ArrayDataProvider;
+use frontend\modules\ehr\models\OnOffEhr;
 
 /**
  * Site controller
@@ -86,6 +87,19 @@ class SiteController extends AppController {
         return $this->render('log-error',[
             'dataProvider'=>$dataProvider
         ]);
+    }
+    
+    public function actionOnoffEhr(){
+        $model = OnOffEhr::find()->one();
+        if($model->status=='on'){
+            $model->status = 'off';
+        }else{
+            $model->status='on';
+        }
+        if($model->save()){
+            \Yii::$app->session->setFlash('success', 'EHR is'.$model->status);
+            return $this->redirect(['site/index']);
+        }
     }
 
 }

@@ -204,6 +204,17 @@ $this->title = 'DHDC Backend';
             <div class="col-sm-4">
                 <?php
                 //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
+                $route = yii\helpers\Url::to(['site/onoff-ehr']);
+                ?>
+                <a class="btn btn-material-blue-300 btn-xlarge" href="<?= $route ?>"> 
+                    <i class="glyphicon glyphicon-off"></i> เปิด/ปิด EHR
+                </a>
+
+            </div>
+            
+            <div class="col-sm-4">
+                <?php
+                //$route = Yii::$app->urlManager->createUrl(['site/checkfile','param'=>'value']);
                 $route = yii\helpers\Url::to(['site/log-error', 'param' => 'value']);
                 ?>
                 <a class="btn btn-material-red-300 btn-xlarge" href="<?= $route ?>"> 

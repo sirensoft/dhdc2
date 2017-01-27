@@ -21,11 +21,11 @@ MaterialAsset::register($this);
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?= Html::csrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
-<?php $this->head() ?>
+        <?php $this->head() ?>
     </head>
     <body>
         <?php $this->beginBody() ?>
-            <?php $config_main = backend\models\Sysconfigmain::find()->one(); ?>
+        <?php $config_main = backend\models\Sysconfigmain::find()->one(); ?>
         <div class="wrap">
             <?php
             $center = isset($config_main->district_name) ? $config_main->district_name : 'Not set';
@@ -61,18 +61,18 @@ MaterialAsset::register($this);
                     'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
                 ])
                 ?>
-<?= $content ?>
+                <?= $content ?>
             </div>
         </div>
 
         <footer class="footer">
             <div class="container">
-                <p class="pull-left">&copy; <?=  Html::encode($center)?> <?= date('Y') ?></p>
+                <p class="pull-left">&copy; <?= Html::encode($center) ?> <?= date('Y') ?></p>
                 <p class="pull-right"><?= Yii::powered() ?></p>
             </div>
         </footer>
 
-<?php $this->endBody() ?>
+        <?php $this->endBody() ?>
     </body>
 </html>
 <?php $this->endPage() ?>
