@@ -71,7 +71,7 @@ AppAsset::register($this);
             $rpt_mnu_itms[] = ['label' => '<i class="glyphicon glyphicon-list-alt"></i> ระบบ HDC DATA-Exchange', 'url' => ['/hdcex/default/index']];
             
             
-            $rpt_mnu_itms[] = ['label' => '<i class="glyphicon glyphicon-list-alt"></i> ระบบข้อมูลแผนที่(GIS)', 'url' => ['/gis/default/index']];
+            $rpt_mnu_itms[] = ['label' => '<i class="glyphicon glyphicon-list-alt"></i> ระบบข้อมูลแผนที่(GIS)', 'url' => ['/gis2/default/index']];
             
             $rpt_mnu_itms[] = ['label' => '<i class="glyphicon glyphicon-list-alt"></i> ระบบรายงาน(SQL)', 'url' => ['/sqlscript/index']];
             

@@ -89,7 +89,11 @@ $js = <<<JS
            onEachFeature:function(feature,layer){    
                 //layer.setIcon(L.mapbox.marker.icon({'marker-color': '#82f217','marker-symbol':'h'})); 
                 layer.setIcon(ic_house); 
-                layer.bindPopup(feature.properties.FULL_HOUSE+'<br>'+'เจ้าบ้าน:-'+feature.properties.HEAD_NAME);               
+                
+                var lat = feature.geometry.coordinates[1] ;
+                var lon = feature.geometry.coordinates[0] ;
+                var ll = lat+','+lon;
+                layer.bindPopup(feature.properties.FULL_HOUSE+'<br>'+'เจ้าบ้าน:-'+feature.properties.HEAD_NAME+'<hr>'+'<a href=//www.google.co.th/maps?q='+ll+' target=_blank>ระยะทาง</a>');               
                 
                
            },
